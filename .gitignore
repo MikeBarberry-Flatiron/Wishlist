@@ -1,0 +1,8 @@
+client/node_modules
+client/package-lock.json
+client/yarn.lock
+
+server/Gemfile.lock
+server/tmp/**/*
+
+.DS_Store

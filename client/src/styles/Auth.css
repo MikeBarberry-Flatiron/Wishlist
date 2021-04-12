@@ -1,0 +1,39 @@
+#logo {
+    position: fixed;
+}
+
+#authButton {
+    float: right;
+    margin-right: 29rem;
+    margin-top: 7rem;
+    width: 100px;
+    height: 40px;
+    border-radius: 1rem;
+}
+
+.authContainer {
+    border: 3px solid black;
+    margin: auto;
+    position: flex;
+    text-align: center;
+    top: 50%;
+    width: 20%; 
+    transform: translateY(70%); }
+    .authForm input {
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 4rem; }
+        .authForm input:hover {
+        font-weight: bold; }
+        .authForm input[type=submit] {
+            cursor: pointer;
+            width: 70%;
+            background-color: darkslategrey;
+            color: whitesmoke; 
+            font-weight: normal; }
+            .authForm input[type="submit"]:hover {
+                opacity: 95%; }
+
+.errorMessage {
+    color: red
+}

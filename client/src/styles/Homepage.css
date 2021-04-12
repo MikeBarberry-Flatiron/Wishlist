@@ -1,0 +1,95 @@
+#logout {
+    float: right;
+    margin-right: 5rem;
+    margin-top: 3rem;
+    width: 100px;
+    height: 40px;
+    border-radius: 1rem; }
+    #logout:hover {
+        cursor: pointer; }
+
+#filterDropdownContainer {
+    position: relative;
+    top: 10rem;
+    left: 70rem; }
+    #filterDropdown {
+        border-radius: 0.5rem; }
+        #filterLabel {
+            margin-right: 5px; }
+
+.contentContainer {
+    position: absolute;
+    bottom: 0;
+    margin-left: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row; }
+    .userContent {
+        border: 1px solid black;
+        margin: 0 15px 15px 0;
+        padding: 1rem 3rem 1rem 3rem; 
+        justify-content: center;
+        text-align: center; }
+        .deleteButton {
+            color: red;
+            border-radius: 0.5rem; }
+            .deleteButton:hover {
+                cursor: pointer; }
+                .contentImage {
+                    width: 170px;
+                    height: 190px; }
+
+#addContentContainer {
+    position: relative;
+    top: 15rem;
+    left: 3rem; }
+    #addContentForm input {
+        border-radius: 3rem;
+        margin-bottom: 0.5rem;
+        margin-left: 0.5rem; }
+        #addContentForm input[type="submit"] {
+            width: 6rem;
+            background-color: darkslategrey;
+            color: whitesmoke; }
+
+.slider {
+    width: 500px;
+    height: 300px;
+    background-color: yellow;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    text-align: center;
+    overflow: hidden; }
+    .image-container {
+        width: 1500px;
+        background-color: pink;
+        height: 300px;
+        clear: both;
+        position: relative;
+        -webkit-transition: left 2s;
+        -moz-transition: left 2s;
+        -o-transition: left 2s;
+        transition: left 2s; }
+        .slide {
+            float: left;
+            margin: 0px;
+            padding: 0px;
+            position: relative; }
+            #slide-1:target ~ .image-container {
+                left: 0px; }
+                #slide-2:target ~ .image-container {
+                    left: -500px; }
+                    #slide-3:target ~ .image-container {
+                        left: -1000px; }
+                        .buttons {
+                            position: relative;
+                            top: -20px; }
+                            .buttons a {
+                                display: inline-block;
+                                height: 15px;
+                                width: 15px;
+                                border-radius: 50px;
+                                margin-right: 0.5rem;
+                                background-color: whitesmoke }

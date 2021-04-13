@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-
 export default class Login extends Component {
     constructor() {
         super()
@@ -28,14 +27,14 @@ export default class Login extends Component {
         .then(res => {
             if (res.data.status === 200) {
                 localStorage.setItem("jwt", res.data.jwt);
-                window.location = '/homepage'
+                window.location = '/homepage' 
             } else {
                 this.setState({
                     errors: res.data.message
                 })
             }
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err))
     }
 
     render() {

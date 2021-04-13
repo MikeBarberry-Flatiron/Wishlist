@@ -39,7 +39,7 @@ export default class HomePage extends Component {
 
     decodeToken = () => {
         const token = this.state.jwt
-        var  decoded = jwt_decode(token).user_name;
+        const  decoded = jwt_decode(token).user_name;
         console.log(decoded)
     }
 
@@ -87,7 +87,6 @@ export default class HomePage extends Component {
                     :
                     <NotLoggedIn />
                 }
-                {this.decodeToken()}
             </div>
         )
     }

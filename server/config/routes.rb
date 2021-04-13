@@ -4,5 +4,4 @@ Rails.application.routes.draw do
   post '/index' => 'homepage#index'
   post '/delete' => 'homepage#delete'
   post '/add' => 'homepage#add'
-  post '/user' => 'users#check_user'
 end

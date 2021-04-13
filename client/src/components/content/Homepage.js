@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwt_decode from "jwt-decode";
 import React, { Component } from 'react';
 import NotLoggedIn from '../auth/NotLoggedIn';
 import UserContent from './UserContent'
@@ -34,6 +35,12 @@ export default class HomePage extends Component {
                 })
             })
         })
+    }
+
+    decodeToken = () => {
+        const token = this.state.jwt
+        var  decoded = jwt_decode(token).user_name;
+        console.log(decoded)
     }
 
     handleClick = () => {
@@ -80,6 +87,7 @@ export default class HomePage extends Component {
                     :
                     <NotLoggedIn />
                 }
+                {this.decodeToken()}
             </div>
         )
     }

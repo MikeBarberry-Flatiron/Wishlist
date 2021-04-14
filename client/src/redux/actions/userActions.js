@@ -1,7 +1,8 @@
 import jwt_decode from 'jwt-decode'
 import { SET_CURRENT_USER } from './types';
+import { SET_USER_ERRORS } from './types'
 
-export const checkUser = user => (dispatch) => {
+export const loginUser = user => (dispatch) => {
     fetch('/login', {
         method: 'POST',
         headers: {
@@ -21,7 +22,11 @@ export const checkUser = user => (dispatch) => {
                 })
               window.location = '/homepage'
           } else {
-              alert(json.message)
+            dispatch({
+              type: SET_USER_ERRORS,
+              payload: json.message
+          })
           }    
       });
   };
+

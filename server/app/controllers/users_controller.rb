@@ -16,9 +16,9 @@ class UsersController < ApplicationController
             payload = { user_name: user.username }
             hmac_secret = '$ecr#tK@Y&'
             token = JWT.encode payload, hmac_secret, 'HS256'
-            render json: {:status => 200, :message => "Logged In", :jwt => token } 
+            render json: { :status => 200, :message => "Logged In", :jwt => token } 
         else 
-            render json: {:status => 401, :message => "Authentication Failed"}
+            render json: { :status => 401, :message => "Authentication Failed" } 
         end 
     end 
 end

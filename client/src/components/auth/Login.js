@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-/* import { checkUser } from '../../redux/actions/userActions.js'
-import { connect } from 'react-redux'; */
+import { connect } from 'react-redux'
 
-export default class Login extends Component {
+class Login extends Component {
     constructor() {
         super()
         this.state = {
@@ -38,8 +37,8 @@ export default class Login extends Component {
                     <label htmlFor="password">password:
                         <input type="password" name="password" onChange={e => this.handleInput(e)} value={this.state.password} required /><br />
                     </label>
-                    {this.state.errors && 
-                        <p class="errorMessage">{this.state.errors} </p>
+                    {this.props.userErrors && 
+                        <p class="errorMessage">{this.props.userErrors} </p>
                     }
                     <input type="submit" value="submit"/>
                 </form>
@@ -48,8 +47,10 @@ export default class Login extends Component {
     }
 }
 
-/* const mapStateToProps =  state => ({
-    currentUser: state.currentUser.user
-})
+const mapStateToProps = (state) => { 
+    return { 
+     userErrors: state.userErrors.error
+    };
+};
 
-export default connect(mapStateToProps, { checkUser })(Login) */
+export default connect(mapStateToProps)(Login) 

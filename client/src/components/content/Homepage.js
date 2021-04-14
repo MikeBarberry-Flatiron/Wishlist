@@ -26,16 +26,12 @@ class HomePage extends Component {
         axios.post('/index', jwt)
         .then(res => {
             if (res.data.status === 400) {
-                window.location = 'notloggedin'
+                window.location = '/notloggedin'
             } else {
                 this.setState({
-                    userContent: res.data.user_content,
-                    lifestyleContent: res.data.user_content.filter(content => {
-                            return  content.category === "lifestyle"
-                    }),
-                    clothingContent: res.data.user_content.filter(content => {
-                        return  content.category === "clothing"
-                    })
+                    userContent: res.data.all_content,
+                    lifestyleContent: res.data.lifestyle_content,
+                    clothingContent: res.data.clothing_content
                 })
             }
         })
@@ -92,7 +88,10 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = (state) => { 
-    return { currentUser: state.currentUser.username };
+    return { 
+        currentUser: state.currentUser.username,
+       
+    };
 };
 
 export default connect(mapStateToProps)(HomePage)

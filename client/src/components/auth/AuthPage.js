@@ -4,7 +4,7 @@ import Register from './Register'
 import AuthToggle from './AuthToggle'
 import WishlistLogo from '../../assets/wishlist_logo.png'
 import '../../styles/Auth.css'
-import { checkUser } from '../../redux/actions/userActions';
+import { loginUser } from '../../redux/actions/userActions';
 import { connect } from 'react-redux';
 
 class AuthPage extends Component {
@@ -24,7 +24,7 @@ class AuthPage extends Component {
     }
 
     handleLogin = (user) => {
-        this.props.checkUser(user)
+        this.props.loginUser(user)
     }
 
     render() {
@@ -42,4 +42,4 @@ const mapStateToProps = state => ({
     currentUser: state.currentUser.username
 })
 
-export default connect(mapStateToProps, { checkUser })(AuthPage)
+export default connect(mapStateToProps, { loginUser })(AuthPage)

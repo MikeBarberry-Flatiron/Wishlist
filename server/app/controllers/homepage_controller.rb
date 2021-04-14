@@ -1,18 +1,23 @@
 require 'jwt'
+# verify_token.contents
 
 class HomepageController < ApplicationController
     def index
         if verify_token 
-            render json: {:status => 200, :user_content => verify_token.contents}
+            all = verify_token.contents
+            lifestyle = Content.where(:category => "lifestyle", :user_id => verify_token.id)
+            clothing = Content.where(:category => "clothing", :user_id => verify_token.id)
+
+            render json: { :status => 200, :all_content => all, :lifestyle_content => lifestyle, :clothing_content => clothing }
         else 
-            render json: {:status => 400, :errors => verify_token.errors.full_messages}
+            render json: { :status => 400, :errors => verify_token.errors.full_messages }
         end 
     end 
 
     def delete 
         content = Content.find(params[:content_id])
         content.delete
-        render json: {:status => 200, :message => "Content Deleted"}
+        render json: { :status => 200, :message => "Content Deleted" }
     end 
 
     def add 

@@ -6,5 +6,6 @@ server/Gemfile.lock
 server/tmp/**/*
 server/log/**/*
 server/log/development.log
+server/config/local_env.yml
 
 .DS_Store

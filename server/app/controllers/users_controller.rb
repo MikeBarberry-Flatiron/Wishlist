@@ -14,7 +14,7 @@ class UsersController < ApplicationController
         user = User.find_by(:username => params[:username])
         if user && user.authenticate(params[:password])
             payload = { user_name: user.username }
-            hmac_secret = '$ecr#tK@Y&'
+            hmac_secret = ENV["HMAC_SECRET"]
             token = JWT.encode payload, hmac_secret, 'HS256'
             render json: { :status => 200, :message => "Logged In", :jwt => token } 
         else 

@@ -32,7 +32,7 @@ class HomepageController < ApplicationController
     private 
     def verify_token
         token = params[:jwt]
-        hmac_secret = '$ecr#tK@Y&'
+        hmac_secret = ENV["HMAC_SECRET"]
         decoded_token = JWT.decode token, hmac_secret, true, { algorithm: 'HS256'}
         
         user = User.find_by(username: decoded_token[0]["user_name"])

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+/* import { checkUser } from '../../redux/actions/userActions.js'
+import { connect } from 'react-redux'; */
 
 export default class Login extends Component {
     constructor() {
@@ -23,18 +24,7 @@ export default class Login extends Component {
             username: this.state.username, 
             password: this.state.password
         }
-        axios.post('/login', login)
-        .then(res => {
-            if (res.data.status === 200) {
-                localStorage.setItem("jwt", res.data.jwt);
-                window.location = '/homepage' 
-            } else {
-                this.setState({
-                    errors: res.data.message
-                })
-            }
-        })
-        .catch(err => console.log(err))
+        this.props.handleLogin(login)
     }
 
     render() {
@@ -57,3 +47,9 @@ export default class Login extends Component {
         )
     }
 }
+
+/* const mapStateToProps =  state => ({
+    currentUser: state.currentUser.user
+})
+
+export default connect(mapStateToProps, { checkUser })(Login) */

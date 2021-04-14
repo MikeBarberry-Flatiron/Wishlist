@@ -4,8 +4,10 @@ import Register from './Register'
 import AuthToggle from './AuthToggle'
 import WishlistLogo from '../../assets/wishlist_logo.png'
 import '../../styles/Auth.css'
+import { checkUser } from '../../redux/actions/userActions';
+import { connect } from 'react-redux';
 
-export default class AuthPage extends Component {
+class AuthPage extends Component {
     constructor() {
         super()
         this.state = {
@@ -21,13 +23,23 @@ export default class AuthPage extends Component {
         })
     }
 
+    handleLogin = (user) => {
+        this.props.checkUser(user)
+    }
+
     render() {
         return (
             <div>
-                < img id="logo" src={WishlistLogo} alt="wishlist-logo"></img>
+                <img id="logo" src={WishlistLogo} alt="wishlist-logo"></img>
                 <AuthToggle id={"authButton"} setPage={this.setPage} type={this.state.login} />
-                {this.state.login ? <Login /> : <Register /> }
+                {this.state.login ? <Login handleLogin={this.handleLogin} /> : <Register /> }
             </div>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    currentUser: state.currentUser.username
+})
+
+export default connect(mapStateToProps, { checkUser })(AuthPage)

@@ -1,6 +1,6 @@
-import axios from 'axios';
-import jwt_decode from "jwt-decode";
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 import NotLoggedIn from '../auth/NotLoggedIn';
 import UserContent from './UserContent'
 import AddContent from './AddContent'
@@ -9,7 +9,7 @@ import SlidingImage from './SlidingImage'
 import WishListLogo from '../../assets/wishlist_logo.png'
 import '../../styles/Homepage.css'
 
-export default class HomePage extends Component {
+class HomePage extends Component {
     constructor() {
         super()
         this.state = {
@@ -25,22 +25,20 @@ export default class HomePage extends Component {
         const jwt = { jwt: this.state.jwt}
         axios.post('/index', jwt)
         .then(res => {
-            this.setState({
-                userContent: res.data.user_content,
-                lifestyleContent: res.data.user_content.filter(content => {
-                        return  content.category === "lifestyle"
-                }),
-                clothingContent: res.data.user_content.filter(content => {
-                    return  content.category === "clothing"
+            if (res.data.status === 400) {
+                window.location = 'notloggedin'
+            } else {
+                this.setState({
+                    userContent: res.data.user_content,
+                    lifestyleContent: res.data.user_content.filter(content => {
+                            return  content.category === "lifestyle"
+                    }),
+                    clothingContent: res.data.user_content.filter(content => {
+                        return  content.category === "clothing"
+                    })
                 })
-            })
+            }
         })
-    }
-
-    decodeToken = () => {
-        const token = this.state.jwt
-        const  decoded = jwt_decode(token).user_name;
-        console.log(decoded)
     }
 
     handleClick = () => {
@@ -74,9 +72,10 @@ export default class HomePage extends Component {
         }
         return(
             <div>
-                {this.state.jwt
+                {this.props.currentUser
                     ? 
                     <div>
+                        <h3 id="welcomeMessage">Welcome back, {this.props.currentUser}!</h3>
                         <button id="logout" onClick={this.handleClick}>logout</button>
                         <img id="logo" src={WishListLogo} alt="wishlist-logo"></img>
                         <FilterDropdown handleFilter={this.handleFilter} />
@@ -92,6 +91,8 @@ export default class HomePage extends Component {
     }
 }
 
-HomePage.defaultProps = {
-    message: "Hello World"
-}
+const mapStateToProps = (state) => { 
+    return { currentUser: state.currentUser.username };
+};
+
+export default connect(mapStateToProps)(HomePage)

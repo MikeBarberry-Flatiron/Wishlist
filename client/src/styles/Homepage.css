@@ -8,6 +8,11 @@
     #logout:hover {
         cursor: pointer; }
 
+#welcomeMessage {
+    position: fixed;
+    left: 42rem;
+    top: 6rem;
+}        
 #filterDropdownContainer {
     position: relative;
     top: 10rem;

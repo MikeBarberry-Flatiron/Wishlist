@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 
 export default class AddContent extends Component {
@@ -27,8 +26,15 @@ export default class AddContent extends Component {
             image: this.state.image,
             category: this.state.category
         }
-        axios.post('/add', addContent)
-        .then(res => console.log(res))
+        fetch('/add', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(addContent)
+          })
+        .then(res => res.json())
+        .then(json => console.log(json))
     }
 
     render() {

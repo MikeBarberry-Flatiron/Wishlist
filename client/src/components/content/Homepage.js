@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import NotLoggedIn from '../auth/NotLoggedIn';
 import UserContent from './UserContent'
 import AddContent from './AddContent'
@@ -23,15 +22,22 @@ class HomePage extends Component {
 
     componentDidMount() {
         const jwt = { jwt: this.state.jwt}
-        axios.post('/index', jwt)
-        .then(res => {
-            if (res.data.status === 400) {
+        fetch('/index', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(jwt)
+          })
+        .then(res => res.json())
+        .then(json => {
+            if (json.status === 400) {
                 window.location = '/notloggedin'
             } else {
                 this.setState({
-                    userContent: res.data.all_content,
-                    lifestyleContent: res.data.lifestyle_content,
-                    clothingContent: res.data.clothing_content
+                    userContent: json.all_content,
+                    lifestyleContent: json.lifestyle_content,
+                    clothingContent: json.clothing_content
                 })
             }
         })
@@ -44,9 +50,16 @@ class HomePage extends Component {
 
     handleDelete = (id) => {
         const contentId = { content_id: id }
-        axios.post('/delete', contentId)
-        .then(res => {
-            console.log(res)
+        fetch('/delete', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(contentId)
+          })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json)
             window.location.reload()
         })
     }

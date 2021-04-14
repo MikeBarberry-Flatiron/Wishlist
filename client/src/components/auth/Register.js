@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 export default class Register extends Component {
     constructor() {
@@ -23,13 +22,20 @@ export default class Register extends Component {
             username: this.state.username, 
             password: this.state.password
         }
-        axios.post('/register', register)
-        .then(res => {            
-            if (res.data.status === 201) {
+        fetch('/register', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(register)
+          })
+        .then(res => res.json())
+        .then(json => {            
+            if (json.status === 201) {
                 window.location = '/homepage'            
             } else {
                 this.setState({
-                    errors: res.data.errors[0]
+                    errors: json.errors[0]
                 })
             }
         })

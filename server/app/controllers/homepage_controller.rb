@@ -1,5 +1,4 @@
 require 'jwt'
-# verify_token.contents
 
 class HomepageController < ApplicationController
     def index

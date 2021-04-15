@@ -58,6 +58,14 @@
             background-color: darkslategrey;
             color: whitesmoke; }
 
+#categoryDropdown{
+    border-radius: 3rem;
+    width: 9rem;
+    margin-bottom: .5rem;
+    height: 24px;
+    margin-left: 0.5rem;
+}
+
 .slider {
     width: 500px;
     height: 300px;

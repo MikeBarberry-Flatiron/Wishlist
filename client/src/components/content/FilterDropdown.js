@@ -9,6 +9,8 @@ export default class FilterDropdown extends Component {
                 <option value="all">all</option>
                 <option value="clothing">clothing</option>
                 <option value="lifestyle">lifestyle</option>
+                <option value="technology">technology</option>
+                <option value="household">household</option>
             </select>
         </div>
         )

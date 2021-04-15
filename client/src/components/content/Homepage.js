@@ -16,6 +16,8 @@ class HomePage extends Component {
             userContent: [],
             lifestyleContent: [],
             clothingContent: [],
+            technologyContent: [],
+            householdContent: [],
             filterOption: 'all'
         }
     }
@@ -37,7 +39,9 @@ class HomePage extends Component {
                 this.setState({
                     userContent: json.all_content,
                     lifestyleContent: json.lifestyle_content,
-                    clothingContent: json.clothing_content
+                    clothingContent: json.clothing_content,
+                    technologyContent: json.technology_content,
+                    householdContent: json.household_content
                 })
             }
         })
@@ -75,6 +79,8 @@ class HomePage extends Component {
             switch (this.state.filterOption) {
                 case "lifestyle": return <UserContent  handleDelete={this.handleDelete} content={this.state.lifestyleContent} />
                 case "clothing": return <UserContent handleDelete={this.handleDelete} content={this.state.clothingContent} />
+                case "technology": return <UserContent handleDelete={this.handleDelete} content={this.state.technologyContent} />
+                case "household": return <UserContent handleDelete={this.handleDelete} content={this.state.householdContent} />
 
                 default: return <UserContent handleDelete={this.handleDelete} content={this.state.userContent} />
             }

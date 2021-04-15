@@ -17,6 +17,12 @@ export default class AddContent extends Component {
             [e.target.name]: e.target.value
         });
     }
+    
+    handleCategory = (e) => {
+        this.setState({
+            category: e.target.value
+        })
+    }
 
     handleSubmit = () => {
         const addContent = {
@@ -42,7 +48,13 @@ export default class AddContent extends Component {
             <div id="addContentContainer">
                 <form id="addContentForm" onSubmit={this.handleSubmit}>
                     <label htmlFor="category">category:
-                        <input type="text" name="category" onChange={e => this.handleInput(e)} value={this.state.category} required /><br />
+                        <select onChange={this.handleCategory} name="category" id="categoryDropdown" required>
+                            <option value="">select a category</option>
+                            <option value="clothing">clothing</option>
+                            <option value="lifestyle">lifestyle</option>
+                            <option value="technology">technology</option>
+                            <option value="household">household</option>
+                        </select><br></br>
                     </label>
                     <label htmlFor="description">description:
                         <input type="text" name="description" onChange={e => this.handleInput(e)} value={this.state.description} required /><br />

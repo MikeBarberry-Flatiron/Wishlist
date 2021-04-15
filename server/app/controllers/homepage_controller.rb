@@ -6,8 +6,10 @@ class HomepageController < ApplicationController
             all = verify_token.contents
             lifestyle = Content.where(:category => "lifestyle", :user_id => verify_token.id)
             clothing = Content.where(:category => "clothing", :user_id => verify_token.id)
+            technology = Content.where(:category => "technology", :user_id => verify_token.id)
+            household = Content.where(:category => "household", :user_id => verify_token.id)
 
-            render json: { :status => 200, :all_content => all, :lifestyle_content => lifestyle, :clothing_content => clothing }
+            render json: { :status => 200, :all_content => all, :lifestyle_content => lifestyle, :clothing_content => clothing, :technology_content => technology, :household_content => household }
         else 
             render json: { :status => 400, :errors => verify_token.errors.full_messages }
         end 

@@ -57,13 +57,13 @@ export default class AddContent extends Component {
                         </select><br></br>
                     </label>
                     <label htmlFor="description">description:
-                        <input type="text" name="description" onChange={e => this.handleInput(e)} value={this.state.description} required /><br />
+                        <input type="text" name="description" onChange={e => this.handleInput(e)} value={this.state.description} minLength="5" maxLength="120" required /><br />
                     </label>
                     <label htmlFor="url">link:
-                        <input type="url" name="url" onChange={e => this.handleInput(e)} value={this.state.url} required /><br />
+                        <input type="url" name="url" placeholder="website" onChange={e => this.handleInput(e)} value={this.state.url} required /><br />
                     </label>
                     <label htmlFor="image">picture:
-                        <input type="text" name="image" onChange={e => this.handleInput(e)} value={this.state.image} required /><br />
+                        <input type="url" name="image" placeholder="image url" onChange={e => this.handleInput(e)} value={this.state.image} required /><br />
                     </label>
                     <input type="submit" value="add"/>
                 </form>

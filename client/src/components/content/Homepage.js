@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import NotLoggedIn from '../auth/NotLoggedIn';
+import { logoutUser } from '../../redux/actions/userActions'
 import UserContent from './UserContent'
 import AddContent from './AddContent'
 import FilterDropdown from './FilterDropdown'
@@ -48,8 +48,7 @@ class HomePage extends Component {
     }
 
     handleClick = () => {
-        localStorage.clear()
-        window.location = '/login'
+        this.props.logoutUser()
     }
 
     handleDelete = (id) => {
@@ -87,20 +86,15 @@ class HomePage extends Component {
         }
         return(
             <div>
-                {this.props.currentUser
-                    ? 
-                    <div>
-                        <h3 id="welcomeMessage">Welcome back, {this.props.currentUser}!</h3>
-                        <button id="logout" onClick={this.handleClick}>logout</button>
-                        <img id="logo" src={WishListLogo} alt="wishlist-logo"></img>
-                        <FilterDropdown handleFilter={this.handleFilter} />
-                        <AddContent />
-                        <SlidingImage />
-                        {filter()}
-                    </div>
-                    :
-                    <NotLoggedIn />
-                }
+                <div>
+                    <h3 id="welcomeMessage">Welcome back, {this.props.currentUser}!</h3>
+                    <button id="logout" onClick={this.handleClick}>logout</button>
+                    <img id="logo" src={WishListLogo} alt="wishlist-logo"></img>
+                    <FilterDropdown handleFilter={this.handleFilter} />
+                    <AddContent />
+                    <SlidingImage />
+                    {filter()}
+                </div>
             </div>
         )
     }
@@ -109,8 +103,7 @@ class HomePage extends Component {
 const mapStateToProps = (state) => { 
     return { 
         currentUser: state.currentUser.username,
-       
     };
 };
 
-export default connect(mapStateToProps)(HomePage)
+export default connect(mapStateToProps, { logoutUser })(HomePage)

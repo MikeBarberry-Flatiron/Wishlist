@@ -30,3 +30,11 @@ export const loginUser = user => (dispatch) => {
       });
   };
 
+export const logoutUser = () => (dispatch) => {
+  localStorage.clear()
+  dispatch({
+    type: SET_CURRENT_USER,
+    payload: ''
+  })
+}
+

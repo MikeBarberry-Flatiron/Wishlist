@@ -1,7 +1,10 @@
 import { SET_CURRENT_USER } from '../actions/types'
 
+const isEmpty = require('is-empty')
+
 let initialState = {
-    username: ''
+    username: '',
+    isAuthenticated: false
 };
 
 const userReducer = (state = initialState, action) => {
@@ -9,6 +12,7 @@ const userReducer = (state = initialState, action) => {
         case SET_CURRENT_USER:
             return {
                 ...state,
+                isAuthenticated: !isEmpty(action.payload),
                 username: action.payload
             }
         default:

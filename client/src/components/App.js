@@ -2,10 +2,10 @@ import { BrowserRouter as Router, Route} from 'react-router-dom'
 import { Provider } from 'react-redux'
 import AuthPage from './auth/AuthPage'
 import HomePage from './content/HomePage.js'
-import NotLoggedIn from './auth/NotLoggedIn'
 import store from '../redux/store.js'
 import jwt_decode from 'jwt-decode'
 import { SET_CURRENT_USER } from '../redux/actions/types';
+import ProtectedRoute from './ProtectedRoute'
 
 if (localStorage.jwt) {
     const jwt = localStorage.jwt 
@@ -23,8 +23,7 @@ function App() {
           <Route exact path ="/" component={AuthPage} />
           <Route exact path ="/login" component={AuthPage} />
           <Route exact path ="/register" component={AuthPage} />
-          <Route exact path ="/homepage" component={HomePage} />
-          <Route exact path ="/notloggedin" component={NotLoggedIn} />
+          <ProtectedRoute exact path ="/homepage" component={HomePage} />
         </Router>
       </Provider>
     );

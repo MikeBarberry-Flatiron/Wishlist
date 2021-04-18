@@ -87,7 +87,7 @@ class HomePage extends Component {
         return(
             <div>
                 <div>
-                    <h3 id="welcomeMessage">Welcome back, {this.props.currentUser}!</h3>
+                    <h3 id="welcomeMessage">Welcome back, {this.props.currentUser.username}!</h3>
                     <button id="logout" onClick={this.handleClick}>logout</button>
                     <img id="logo" src={WishListLogo} alt="wishlist-logo"></img>
                     <FilterDropdown handleFilter={this.handleFilter} />
@@ -100,10 +100,6 @@ class HomePage extends Component {
     }
 }
 
-const mapStateToProps = (state) => { 
-    return { 
-        currentUser: state.currentUser.username,
-    };
-};
+// don't need to map state to props here because it's getting passed through ProtectedRoute 
 
-export default connect(mapStateToProps, { logoutUser })(HomePage)
+export default connect(null, { logoutUser })(HomePage)

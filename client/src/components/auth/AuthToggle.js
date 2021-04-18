@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class AuthToggle extends Component {
-    render() {
-        return (
-            <button id={this.props.id} onClick={this.props.setPage}>{this.props.type ? "register" : "login"}</button>
-        )
-    }
+const AuthToggle = ({ id, setPage, type }) => {
+    return (
+        <button id={id} onClick={setPage}>{type ? "register" : "login"}</button>
+    )
 }
+
+export default AuthToggle

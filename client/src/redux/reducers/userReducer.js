@@ -1,6 +1,5 @@
 import { SET_CURRENT_USER } from '../actions/types'
-
-const isEmpty = require('is-empty')
+import isEmpty from 'is-empty'
 
 let initialState = {
     username: '',

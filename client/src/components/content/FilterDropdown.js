@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class FilterDropdown extends Component {
-    render() {
-        return (
-            <div id="filterDropdownContainer">
-            <label htmlFor="filterDropdown" id="filterLabel">filter:</label>
-            <select onChange={this.props.handleFilter} name="filterDropdown" id="filterDropdown">
-                <option value="all">all</option>
-                <option value="clothing">clothing</option>
-                <option value="lifestyle">lifestyle</option>
-                <option value="technology">technology</option>
-                <option value="household">household</option>
-            </select>
-        </div>
-        )
-    }
+const FilterDropdown = ({ handleFilter }) => {
+    return (
+        <div id="filterDropdownContainer">
+        <label htmlFor="filterDropdown" id="filterLabel">filter:</label>
+        <select onChange={handleFilter} name="filterDropdown" id="filterDropdown">
+            <option value="all">all</option>
+            <option value="clothing">clothing</option>
+            <option value="lifestyle">lifestyle</option>
+            <option value="technology">technology</option>
+            <option value="household">household</option>
+        </select>
+    </div>
+    )
 }
+
+export default FilterDropdown

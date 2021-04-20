@@ -12,10 +12,12 @@ class UsersController < ApplicationController
 
     def login
         user = User.find_by(:username => params[:username])
+
         if user && user.authenticate(params[:password])
             payload = { user_name: user.username }
             hmac_secret = ENV["HMAC_SECRET"]
             token = JWT.encode payload, hmac_secret, 'HS256'
+            
             render json: { :status => 200, :message => "Logged In", :jwt => token } 
         else 
             render json: { :status => 401, :message => "Authentication Failed" } 

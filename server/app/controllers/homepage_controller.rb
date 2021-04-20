@@ -15,6 +15,21 @@ class HomepageController < ApplicationController
         end 
     end 
 
+    def recent 
+        new_posts =  Content.where("created_at > ?", 3.days.ago)
+        data = []
+
+        new_posts.each do |post|
+            h = {}
+            h[:category] = post.category
+            h[:description] = post.description
+            h[:user] = post.user.username
+            data << h 
+        end 
+
+        render json: { :status => 200, :new_posts => data }
+    end 
+
     def delete 
         content = Content.find(params[:content_id])
         content.delete

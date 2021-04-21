@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../../redux/actions/userActions'
 import UserContent from './UserContent'
 import AddContent from './AddContent'
+import RecentPosts from './RecentPosts'
 import FilterDropdown from './FilterDropdown'
 import SlidingImage from './SlidingImage'
 import WishListLogo from '../../assets/wishlist_logo.png'
@@ -93,6 +94,7 @@ class HomePage extends Component {
                     <FilterDropdown handleFilter={this.handleFilter} />
                     <AddContent />
                     <SlidingImage />
+                    <RecentPosts />
                     {filter()}
                 </div>
             </div>

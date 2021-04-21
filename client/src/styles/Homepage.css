@@ -9,12 +9,12 @@
         cursor: pointer; }
 
 #welcomeMessage {
-    position: fixed;
+    position: absolute;
     left: 42rem;
     top: 6rem;
 }        
 #filterDropdownContainer {
-    position: relative;
+    position: absolute;
     top: 10rem;
     left: 70rem; }
     #filterDropdown {
@@ -22,28 +22,67 @@
         #filterLabel {
             margin-right: 5px; }
 
-.contentContainer {
+.content {
+    width: 100%;
+}
+
+#yourContent {
     position: absolute;
-    bottom: 0;
-    margin-left: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row; }
-    .userContent {
-        border: 1px solid black;
-        margin: 0 15px 15px 0;
-        padding: 1rem 3rem 1rem 3rem; 
-        justify-content: center;
-        text-align: center; }
-        .deleteButton {
-            color: red;
-            border-radius: 0.5rem; }
-            .deleteButton:hover {
-                cursor: pointer; }
-                .contentImage {
-                    width: 170px;
-                    height: 190px; }
+    float: left;
+    left: 4rem;
+    top: 27rem; }
+    .contentContainer {
+        position: relative;
+        bottom: 0;
+        max-width: 70%;
+        bottom: 40rem;
+        margin-top: -18.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center; }
+        .userContent {
+            border: 1px solid black;
+            margin: 0 15px 15px 0;
+            padding: 1rem 3rem 1rem 3rem; 
+            justify-content: center;
+            text-align: center;
+            flex-direction: inherit; }
+            .deleteButton {
+                color: red;
+                border-radius: 0.5rem; }
+                .deleteButton:hover {
+                    cursor: pointer; }
+                    .contentImage {
+                        width: 170px;
+                        height: 190px; }
+
+#newContent {
+    position: absolute;
+    left: 84rem;
+    top: 27rem; 
+    float: right; }
+    .newContentContainer {
+        position: relative;
+        bottom: 0;
+        left: 70rem;
+        max-width: 30%;
+        margin-left: 3rem;
+        margin-top: 4rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center; }
+        .newContent {
+            border: 1px solid black;
+            margin: 0 15px 15px 0;
+            padding: 1rem 3rem 1rem 3rem; 
+            justify-content: center;
+            text-align: center;
+            flex-direction: inherit; }
+            .contentImage {
+                width: 120px;
+                height: 140px; }
 
 #addContentContainer {
     position: relative;

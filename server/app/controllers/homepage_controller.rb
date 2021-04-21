@@ -3,11 +3,11 @@ require 'jwt'
 class HomepageController < ApplicationController
     def index
         if verify_token 
-            all = verify_token.contents
-            lifestyle = Content.where(:category => "lifestyle", :user_id => verify_token.id)
-            clothing = Content.where(:category => "clothing", :user_id => verify_token.id)
-            technology = Content.where(:category => "technology", :user_id => verify_token.id)
-            household = Content.where(:category => "household", :user_id => verify_token.id)
+            all = verify_token.contents.order(created_at: :asc)
+            lifestyle = Content.where(:category => "lifestyle", :user_id => verify_token.id).order(created_at: :asc)
+            clothing = Content.where(:category => "clothing", :user_id => verify_token.id).order(created_at: :asc)
+            technology = Content.where(:category => "technology", :user_id => verify_token.id).order(created_at: :asc)
+            household = Content.where(:category => "household", :user_id => verify_token.id).order(created_at: :asc)
 
             render json: { :status => 200, :all_content => all, :lifestyle_content => lifestyle, :clothing_content => clothing, :technology_content => technology, :household_content => household }
         else 
@@ -16,13 +16,14 @@ class HomepageController < ApplicationController
     end 
 
     def recent 
-        new_posts =  Content.where("created_at > ?", 3.days.ago)
+        # let users set post to private so it doesn't show up on recents in other people's page
+        new_posts =  Content.where("created_at > ?", 3.days.ago).order(created_at: :desc).limit(3)
         data = []
-
         new_posts.each do |post|
             h = {}
             h[:category] = post.category
             h[:description] = post.description
+            h[:image] = post.image
             h[:user] = post.user.username
             data << h 
         end 

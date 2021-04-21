@@ -4,6 +4,7 @@ import { logoutUser } from '../../redux/actions/userActions'
 import UserContent from './UserContent'
 import AddContent from './AddContent'
 import NewPosts from './NewPosts'
+import Browse from './Browse'
 import FilterDropdown from './FilterDropdown'
 import SlidingImage from './SlidingImage'
 import WishListLogo from '../../assets/wishlist_logo.png'
@@ -95,6 +96,7 @@ class HomePage extends Component {
                 <img id="logo" src={WishListLogo} alt="wishlist-logo"></img>
                 <FilterDropdown handleFilter={this.handleFilter} />
                 <AddContent />
+                <Browse />
                 <SlidingImage />
                 <NewPosts newPosts={this.state.newPosts}/>
                 {filter()}

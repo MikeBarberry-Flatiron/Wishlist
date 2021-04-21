@@ -22,6 +22,12 @@
         #filterLabel {
             margin-right: 5px; }
 
+#browse {
+    position: absolute;
+    right: 17rem;
+    top: 13rem;
+}
+
 #yourContent {
     position: absolute;
     float: left;
@@ -70,7 +76,7 @@
         align-items: center;
         justify-content: center; }
         .newContent {
-            border: 1px solid black;
+            border: 1px solid pink;
             margin: 0 15px 15px 0;
             padding: 1rem 3rem 1rem 3rem; 
             justify-content: center;

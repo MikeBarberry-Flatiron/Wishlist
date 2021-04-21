@@ -9,9 +9,8 @@ const NewPosts = ({ newPosts }) => {
                 {newPosts.map(post => {
                     return <div key={post.id} className="newContent">
                         <h2>{post.user}</h2>
-                        <a href={post.url} target="_blank" rel="noreferrer"><img className="contentImage" src={post.image} alt="user_content_image"></img></a>
-                        <svg width="24px" height="24px" viewBox="0 0 24 24"></svg>
-                        <LikeButton />
+                        <img className="contentImage" src={post.image} alt="user_content_image"></img>
+                        <LikeButton class="likeButton"/>
                     </div>
                 })}
             </div>

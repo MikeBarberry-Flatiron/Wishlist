@@ -61,14 +61,14 @@
 #newContent {
     font-weight: bold;
     position: absolute;
-    left: 84rem;
+    left: 82rem;
     top: 27rem; 
     float: right; }
     .newContentContainer {
         position: relative;
         bottom: 0;
         left: 70rem;
-        max-width: 30%;
+        max-width: 25%;
         margin-left: 3rem;
         margin-top: 4rem;
         display: flex;

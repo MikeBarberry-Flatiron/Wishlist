@@ -22,21 +22,16 @@
         #filterLabel {
             margin-right: 5px; }
 
-.content {
-    width: 100%;
-}
-
 #yourContent {
     position: absolute;
     float: left;
     left: 4rem;
-    top: 27rem; }
+    top: 28rem; }
     .contentContainer {
-        position: relative;
+        position: absolute;
         bottom: 0;
         max-width: 70%;
-        bottom: 40rem;
-        margin-top: -18.5rem;
+        top: 33rem;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -58,6 +53,7 @@
                         height: 190px; }
 
 #newContent {
+    font-weight: bold;
     position: absolute;
     left: 84rem;
     top: 27rem; 

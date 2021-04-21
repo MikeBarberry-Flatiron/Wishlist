@@ -9,27 +9,23 @@ class HomepageController < ApplicationController
             technology = Content.where(:category => "technology", :user_id => verify_token.id).order(created_at: :asc)
             household = Content.where(:category => "household", :user_id => verify_token.id).order(created_at: :asc)
 
-            render json: { :status => 200, :all_content => all, :lifestyle_content => lifestyle, :clothing_content => clothing, :technology_content => technology, :household_content => household }
+            new_posts =  Content.where("created_at > ?", 3.days.ago).order(created_at: :desc).limit(3)
+            data = []
+            new_posts.each do |post|
+                h = {}
+                h[:category] = post.category
+                h[:description] = post.description
+                h[:image] = post.image
+                h[:user] = post.user.username
+                data << h 
+            end 
+
+            render json: { :status => 200, :all_content => all, :lifestyle_content => lifestyle, :clothing_content => clothing, :technology_content => technology, :household_content => household, :new_posts => data }
         else 
             render json: { :status => 400, :errors => verify_token.errors.full_messages }
         end 
     end 
 
-    def recent 
-        # let users set post to private so it doesn't show up on recents in other people's page
-        new_posts =  Content.where("created_at > ?", 3.days.ago).order(created_at: :desc).limit(3)
-        data = []
-        new_posts.each do |post|
-            h = {}
-            h[:category] = post.category
-            h[:description] = post.description
-            h[:image] = post.image
-            h[:user] = post.user.username
-            data << h 
-        end 
-
-        render json: { :status => 200, :new_posts => data }
-    end 
 
     def delete 
         content = Content.find(params[:content_id])

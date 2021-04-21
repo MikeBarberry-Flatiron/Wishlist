@@ -2,8 +2,8 @@ import React from 'react';
 
 const UserContent =  ({ handleDelete, content }) => {
     return(
-        <div class="content">
-            <h3 id="yourContent">Your Content</h3>
+        <div>
+            <h3 id="yourContent">Your Wishlist</h3>
             <div className="contentContainer">
                 {content.map(content => {
                     const cb = () => { handleDelete(content.id) }

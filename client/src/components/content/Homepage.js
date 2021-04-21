@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../../redux/actions/userActions'
 import UserContent from './UserContent'
 import AddContent from './AddContent'
-import RecentPosts from './RecentPosts'
+import NewPosts from './NewPosts'
 import FilterDropdown from './FilterDropdown'
 import SlidingImage from './SlidingImage'
 import WishListLogo from '../../assets/wishlist_logo.png'
@@ -19,6 +19,7 @@ class HomePage extends Component {
             clothingContent: [],
             technologyContent: [],
             householdContent: [],
+            newPosts: [],
             filterOption: 'all'
         }
     }
@@ -42,10 +43,12 @@ class HomePage extends Component {
                     lifestyleContent: json.lifestyle_content,
                     clothingContent: json.clothing_content,
                     technologyContent: json.technology_content,
-                    householdContent: json.household_content
+                    householdContent: json.household_content,
+                    newPosts: json.new_posts
                 })
             }
         })
+
     }
 
     handleClick = () => {
@@ -87,16 +90,14 @@ class HomePage extends Component {
         }
         return(
             <div>
-                <div>
-                    <h3 id="welcomeMessage">Welcome back, {this.props.currentUser.username}!</h3>
-                    <button id="logout" onClick={this.handleClick}>logout</button>
-                    <img id="logo" src={WishListLogo} alt="wishlist-logo"></img>
-                    <FilterDropdown handleFilter={this.handleFilter} />
-                    <AddContent />
-                    <SlidingImage />
-                    <RecentPosts />
-                    {filter()}
-                </div>
+                <h3 id="welcomeMessage">Welcome back, {this.props.currentUser.username}!</h3>
+                <button id="logout" onClick={this.handleClick}>logout</button>
+                <img id="logo" src={WishListLogo} alt="wishlist-logo"></img>
+                <FilterDropdown handleFilter={this.handleFilter} />
+                <AddContent />
+                <SlidingImage />
+                <NewPosts newPosts={this.state.newPosts}/>
+                {filter()}
             </div>
         )
     }

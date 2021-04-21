@@ -10,7 +10,7 @@ const NewPosts = ({ newPosts }) => {
                     return <div key={post.id} className="newContent">
                         <h2>{post.user}</h2>
                         <img className="contentImage" src={post.image} alt="user_content_image"></img>
-                        <LikeButton class="likeButton"/>
+                        <LikeButton />
                     </div>
                 })}
             </div>

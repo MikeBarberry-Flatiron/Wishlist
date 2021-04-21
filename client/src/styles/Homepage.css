@@ -1,22 +1,23 @@
 #logout {
     float: right;
-    margin-right: 5rem;
+    margin-right: 7rem;
     margin-top: 3rem;
     width: 100px;
     height: 40px;
     border-radius: 1rem; }
     #logout:hover {
-        cursor: pointer; }
+        cursor: pointer;
+        background-color: darkslategray; }
 
 #welcomeMessage {
     position: absolute;
-    left: 42rem;
-    top: 6rem;
+    left: 53rem;
+    top: 1rem;
 }        
 #filterDropdownContainer {
     position: absolute;
-    top: 10rem;
-    left: 70rem; }
+    top: 29rem;
+    right: 33rem; }
     #filterDropdown {
         border-radius: 0.5rem; }
         #filterLabel {
@@ -24,19 +25,23 @@
 
 #browse {
     position: absolute;
-    right: 17rem;
-    top: 13rem;
-}
+    left: 22rem;
+    top: 12.5rem; }
+    .browseLogo {
+        height: 30px;
+        width: 90px
+    }
 
 #yourContent {
     position: absolute;
     float: left;
-    left: 4rem;
+    left: 5rem;
     top: 28rem; }
     .contentContainer {
         position: absolute;
         bottom: 0;
         max-width: 70%;
+        margin-left: 2rem;
         top: 33rem;
         display: flex;
         flex-wrap: wrap;
@@ -61,16 +66,16 @@
 #newContent {
     font-weight: bold;
     position: absolute;
-    left: 82rem;
-    top: 27rem; 
+    left: 87rem;
+    top: 8rem; 
     float: right; }
     .newContentContainer {
         position: relative;
-        bottom: 0;
-        left: 70rem;
+        bottom: 19rem;
+        left: 75rem;
         max-width: 25%;
         margin-left: 3rem;
-        margin-top: 4rem;
+        margin-top: 7rem;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -88,8 +93,8 @@
 
 #addContentContainer {
     position: relative;
-    top: 15rem;
-    left: 3rem; }
+    top: 14rem;
+    left: 4rem; }
     #addContentForm input {
         border-radius: 3rem;
         margin-bottom: 0.5rem;
@@ -98,6 +103,8 @@
             width: 6rem;
             background-color: darkslategrey;
             color: whitesmoke; }
+            #addContentForm input[type="submit"]:hover {
+                cursor: pointer; }
 
 #categoryDropdown{
     border-radius: 3rem;
@@ -110,15 +117,15 @@
 .slider {
     width: 500px;
     height: 300px;
-    background-color: yellow;
+    background-color: white;
     margin-left: auto;
-    margin-right: auto;
-    margin-top: 0px;
+    margin-right: 24rem;
+    margin-top: -4rem;
     text-align: center;
     overflow: hidden; }
     .image-container {
         width: 1500px;
-        background-color: pink;
+        background-color: white;
         height: 300px;
         clear: both;
         position: relative;

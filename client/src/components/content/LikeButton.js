@@ -6,12 +6,16 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
   
 const LikeButton = () => {
+
+  const [liked, setLiked] = useState(false);
+
   return (
     <div>
       <FormControlLabel
         control={<Checkbox icon={<FavoriteBorder />} 
                   checkedIcon={<Favorite />}
           name="likeButton" />}
+        onChange={(e) => setLiked(e.target.checked)}
       />
     </div>
   );

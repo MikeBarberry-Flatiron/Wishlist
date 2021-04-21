@@ -79,26 +79,27 @@ class HomePage extends Component {
     }
 
     render() {
+        const { lifestyleContent, clothingContent, technologyContent, householdContent, userContent, newPosts} = this.state; 
         const filter = () => {
             switch (this.state.filterOption) {
-                case "lifestyle": return <UserContent  handleDelete={this.handleDelete} content={this.state.lifestyleContent} />
-                case "clothing": return <UserContent handleDelete={this.handleDelete} content={this.state.clothingContent} />
-                case "technology": return <UserContent handleDelete={this.handleDelete} content={this.state.technologyContent} />
-                case "household": return <UserContent handleDelete={this.handleDelete} content={this.state.householdContent} />
+                case "lifestyle": return <UserContent  handleDelete={this.handleDelete} content={lifestyleContent} />
+                case "clothing": return <UserContent handleDelete={this.handleDelete} content={clothingContent} />
+                case "technology": return <UserContent handleDelete={this.handleDelete} content={technologyContent} />
+                case "household": return <UserContent handleDelete={this.handleDelete} content={householdContent} />
 
-                default: return <UserContent handleDelete={this.handleDelete} content={this.state.userContent} />
+                default: return <UserContent handleDelete={this.handleDelete} content={userContent} />
             }
         }
         return(
             <div>
-                <h3 id="welcomeMessage">Welcome back, {this.props.currentUser.username}!</h3>
+                <h2 id="welcomeMessage">Welcome back, {this.props.currentUser.username}!</h2>
                 <button id="logout" onClick={this.handleClick}>logout</button>
                 <img id="logo" src={WishListLogo} alt="wishlist-logo"></img>
                 <FilterDropdown handleFilter={this.handleFilter} />
                 <AddContent />
                 <Browse />
                 <SlidingImage />
-                <NewPosts newPosts={this.state.newPosts}/>
+                <NewPosts newPosts={newPosts} />
                 {filter()}
             </div>
         )

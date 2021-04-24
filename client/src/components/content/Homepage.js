@@ -52,6 +52,22 @@ class HomePage extends Component {
 
     }
 
+    handleLike = (id) => {
+        const contentId = { content_id: id }
+        fetch('/like', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(contentId)
+        })
+        .then(res => res.json())
+        .then(json => {
+            console.log(json)
+            window.location.reload()
+        })
+    }
+
     handleClick = () => {
         this.props.logoutUser()
     }
@@ -99,7 +115,7 @@ class HomePage extends Component {
                 <AddContent />
                 <Browse />
                 <SlidingImage />
-                <NewPosts newPosts={newPosts} />
+                <NewPosts newPosts={newPosts} handleLike={this.handleLike} />
                 {filter()}
             </div>
         )

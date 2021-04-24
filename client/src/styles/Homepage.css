@@ -67,7 +67,7 @@
     font-weight: bold;
     position: absolute;
     left: 87rem;
-    top: 8rem; 
+    top: 10rem; 
     float: right; }
     .newContentContainer {
         position: relative;
@@ -75,7 +75,7 @@
         left: 75rem;
         max-width: 25%;
         margin-left: 3rem;
-        margin-top: 7rem;
+        margin-top: 9rem;
         display: flex;
         flex-wrap: wrap;
         align-items: center;

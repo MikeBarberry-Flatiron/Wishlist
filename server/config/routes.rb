@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   post '/index' => 'homepage#index'
   post '/delete' => 'homepage#delete'
   post '/add' => 'homepage#add'
+  post '/like' => 'homepage#like'
 end

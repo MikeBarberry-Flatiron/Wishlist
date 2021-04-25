@@ -8,8 +8,9 @@
     margin-top: 7rem;
     width: 100px;
     height: 40px;
-    border-radius: 1rem;
-}
+    border-radius: 1rem; }
+    #authButton:hover {
+        cursor: pointer; }
 
 .authContainer {
     border: 3px solid black;

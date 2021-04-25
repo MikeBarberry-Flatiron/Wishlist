@@ -6,8 +6,7 @@
     height: 40px;
     border-radius: 1rem; }
     #logout:hover {
-        cursor: pointer;
-        background-color: darkslategray; }
+        cursor: pointer; }
 
 #welcomeMessage {
     position: absolute;

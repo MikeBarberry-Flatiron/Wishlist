@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { logoutUser } from '../../redux/actions/userActions'
+import { logoutUser } from '../../redux/actions/authActions'
+import { getUserContent } from '../../redux/actions/contentActions'
 import UserContent from './UserContent'
 import AddContent from './AddContent'
 import NewPosts from './NewPosts'
@@ -15,7 +16,7 @@ class HomePage extends Component {
         super()
         this.state = {
             jwt: localStorage.getItem('jwt'),
-            userContent: [],
+            allContent: [],
             lifestyleContent: [],
             clothingContent: [],
             technologyContent: [],
@@ -27,28 +28,7 @@ class HomePage extends Component {
 
     componentDidMount() {
         const jwt = { jwt: this.state.jwt}
-        fetch('/index', {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify(jwt)
-          })
-        .then(res => res.json())
-        .then(json => {
-            if (json.status === 400) {
-                window.location = '/notloggedin'
-            } else {
-                this.setState({
-                    userContent: json.all_content,
-                    lifestyleContent: json.lifestyle_content,
-                    clothingContent: json.clothing_content,
-                    technologyContent: json.technology_content,
-                    householdContent: json.household_content,
-                    newPosts: json.new_posts
-                })
-            }
-        })
+        this.props.getUserContent(jwt)
     }
 
     handleLike = (id) => {
@@ -94,7 +74,7 @@ class HomePage extends Component {
     }
 
     render() {
-        const { lifestyleContent, clothingContent, technologyContent, householdContent, userContent, newPosts} = this.state; 
+        const { allContent, lifestyleContent, clothingContent, technologyContent, householdContent, newPosts} = this.props.userContent; 
         const filter = () => {
             switch (this.state.filterOption) {
                 case "lifestyle": return <UserContent  handleDelete={this.handleDelete} content={lifestyleContent} />
@@ -102,7 +82,7 @@ class HomePage extends Component {
                 case "technology": return <UserContent handleDelete={this.handleDelete} content={technologyContent} />
                 case "household": return <UserContent handleDelete={this.handleDelete} content={householdContent} />
 
-                default: return <UserContent handleDelete={this.handleDelete} content={userContent} />
+                default: return <UserContent handleDelete={this.handleDelete} content={allContent} />
             }
         }
         return(
@@ -123,4 +103,4 @@ class HomePage extends Component {
 
 // don't need to map state to props here because it's getting passed through ProtectedRoute 
 
-export default connect(null, { logoutUser })(HomePage)
+export default connect(null, { logoutUser, getUserContent })(HomePage)

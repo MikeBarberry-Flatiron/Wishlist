@@ -1,2 +1,3 @@
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const SET_USER_ERRORS = 'SET_USER_ERRORS';
+export const SET_USER_CONTENT = 'SET_USER_CONTENT';

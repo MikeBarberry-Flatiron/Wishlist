@@ -20,7 +20,6 @@ export const loginUser = user => (dispatch) => {
                     type: SET_CURRENT_USER,
                     payload: user_name
                 })
-              window.location = '/homepage'
           } else {
             dispatch({
               type: SET_USER_ERRORS,

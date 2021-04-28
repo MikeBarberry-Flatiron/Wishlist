@@ -3,25 +3,9 @@ require 'jwt'
 class HomepageController < ApplicationController
     def index
         if verify_user 
-            all = verify_user.contents.order(created_at: :asc)
-            lifestyle = Content.where(:category => "lifestyle", :user_id => verify_user.id).order(created_at: :asc)
-            clothing = Content.where(:category => "clothing", :user_id => verify_user.id).order(created_at: :asc)
-            technology = Content.where(:category => "technology", :user_id => verify_user.id).order(created_at: :asc)
-            household = Content.where(:category => "household", :user_id => verify_user.id).order(created_at: :asc)
+            user_content = verify_user.contents.order(created_at: :asc)
 
-            new_posts =  Content.where("created_at > ?", 3.days.ago).order(created_at: :desc).limit(3)
-            data = []
-            new_posts.each do |post|
-                h = {}
-                h[:id] = post.id
-                h[:category] = post.category
-                h[:description] = post.description
-                h[:image] = post.image
-                h[:user] = post.user.username
-                h[:likes] = post.likes
-                data << h 
-            end 
-            render json: { :status => 200, :all_content => all, :lifestyle_content => lifestyle, :clothing_content => clothing, :technology_content => technology, :household_content => household, :new_posts => data }
+            render json: { :status => 200, :user_content => user_content, :new_posts => new_content }
         else 
             render json: { :status => 400, :errors => verify_user.errors.full_messages }
         end 
@@ -31,7 +15,9 @@ class HomepageController < ApplicationController
     def delete 
         content = Content.find(params[:content_id])
         content.delete
-        render json: { :status => 200, :message => "Content Deleted", id: content.id }
+
+        updated_content = verify_user.contents.order(created_at: :asc)
+        render json: { :status => 200, :message => "Content Deleted", :updated => { :updated_content => updated_content, :new_content => new_content} }
     end 
 
     def add 
@@ -58,5 +44,21 @@ class HomepageController < ApplicationController
         
         user = User.find_by(username: decoded_token[0]["user_name"])
         return user 
+    end 
+
+    def new_content 
+        new_posts =  Content.where("created_at > ?", 3.days.ago).order(created_at: :desc).limit(3)
+            data = []
+            new_posts.each do |post|
+                h = {}
+                h[:id] = post.id
+                h[:category] = post.category
+                h[:description] = post.description
+                h[:image] = post.image
+                h[:user] = post.user.username
+                h[:likes] = post.likes
+                data << h 
+            end 
+        return data 
     end 
 end

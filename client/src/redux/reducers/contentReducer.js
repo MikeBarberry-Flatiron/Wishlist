@@ -2,7 +2,7 @@ import { SET_USER_CONTENT } from '../actions/types'
 import { DELETE_USER_CONTENT } from '../actions/types'
 
 let initialState = {
-    allContent: [],
+    userContent: [],
     lifestyleContent: [],
     clothingContent: [],
     technologyContent: [],
@@ -15,20 +15,27 @@ const contentReducer = (state = initialState, action) => {
         case SET_USER_CONTENT:
             return {
                 ...state,
-                allContent: action.payload.all_content,
-                lifestyleContent: action.payload.all_content.filter(content => {
+                userContent: action.payload.user_content,
+                lifestyleContent: action.payload.user_content.filter(content => {
                     return  content.category === "lifestyle"
                 }),
-                clothingContent: action.payload.clothing_content,
-                technologyContent: action.payload.technology_content,
-                householdContent: action.payload.household_ontent,
+                clothingContent: action.payload.user_content.filter(content => {
+                    return  content.category === "clothing"
+                }),
+                technologyContent: action.payload.user_content.filter(content => {
+                    return  content.category === "technology"
+                }),
+                householdContent: action.payload.user_content.filter(content => {
+                    return  content.category === "household"
+                }),
                 newPosts: action.payload.new_posts
             }
-       /*  case DELETE_USER_CONTENT:
+        case DELETE_USER_CONTENT:
             return {
                 ...state,
-                allContent: 
-            } */
+                userContent: action.payload.updated_content,
+                newPosts: action.payload.new_content
+            }
         default:
             return state
     }

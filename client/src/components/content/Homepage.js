@@ -17,7 +17,7 @@ class HomePage extends Component {
         super()
         this.state = {
             jwt: localStorage.getItem('jwt'),
-            allContent: [],
+            userContent: [],
             lifestyleContent: [],
             clothingContent: [],
             technologyContent: [],
@@ -53,8 +53,11 @@ class HomePage extends Component {
     }
 
     handleDelete = (id) => {
-        const contentId = { content_id: id }
-        this.props.deleteContent(contentId)
+        const request = { 
+            content_id: id,
+            jwt: this.state.jwt
+        }
+        this.props.deleteContent(request)
     }
 
     handleFilter = (e) => {
@@ -64,7 +67,7 @@ class HomePage extends Component {
     }
 
     render() {
-        const { allContent, lifestyleContent, clothingContent, technologyContent, householdContent, newPosts} = this.props.userContent; 
+        const { userContent, lifestyleContent, clothingContent, technologyContent, householdContent, newPosts} = this.props.userContent; 
         const filter = () => {
             switch (this.state.filterOption) {
                 case "lifestyle": return <UserContent  handleDelete={this.handleDelete} content={lifestyleContent} />
@@ -72,7 +75,7 @@ class HomePage extends Component {
                 case "technology": return <UserContent handleDelete={this.handleDelete} content={technologyContent} />
                 case "household": return <UserContent handleDelete={this.handleDelete} content={householdContent} />
 
-                default: return <UserContent handleDelete={this.handleDelete} content={allContent} />
+                default: return <UserContent handleDelete={this.handleDelete} content={userContent} />
             }
         }
         return(

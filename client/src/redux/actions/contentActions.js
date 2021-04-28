@@ -18,20 +18,20 @@ export const getUserContent = jwt => (dispatch) => {
     });
 };
 
-export const deleteContent = contentId => (dispatch) => {
+export const deleteContent = request => (dispatch) => {
     fetch('/delete', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
         },
-        body: JSON.stringify(contentId)
+        body: JSON.stringify(request)
       })
     .then(res => res.json())
     .then(json => {
-        /* dispatch({
+         dispatch({
             type: DELETE_USER_CONTENT,
-            payload: json.id
-        }) */
+            payload: json.updated
+        }) 
         console.log(json.id)
     })
 }

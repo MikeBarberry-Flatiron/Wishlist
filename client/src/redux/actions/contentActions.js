@@ -1,5 +1,5 @@
 import { SET_USER_CONTENT } from './types';
-import { DELETE_USER_CONTENT } from './types';
+import { UPDATE_CONTENT } from './types';
 
 export const getUserContent = jwt => (dispatch) => {
     fetch('/index', {
@@ -29,9 +29,25 @@ export const deleteContent = request => (dispatch) => {
     .then(res => res.json())
     .then(json => {
          dispatch({
-            type: DELETE_USER_CONTENT,
+            type: UPDATE_CONTENT,
             payload: json.updated
         }) 
-        console.log(json.id)
+    })
+}
+
+export const addContent = request => (dispatch) => {
+    fetch('/add', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(request)
+      })
+    .then(res => res.json())
+    .then(json => {
+        dispatch({
+            type: UPDATE_CONTENT,
+            payload: json.updated
+        }) 
     })
 }

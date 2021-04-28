@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { addContent } from '../../redux/actions/contentActions'
+import { connect } from 'react-redux';
 
-export default class AddContent extends Component {
+
+class AddContent extends Component {
     constructor() {
         super()
         this.state = {
@@ -33,16 +36,7 @@ export default class AddContent extends Component {
             image: this.state.image,
             category: this.state.category
         }
-        fetch('/add', {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify(addContent)
-          })
-        .then(res => res.json())
-        .then(json => console.log(json))
-        // no window reload here 
+        this.props.addContent(addContent)
     }
 
     render() {
@@ -73,3 +67,5 @@ export default class AddContent extends Component {
         )
     }
 }
+
+export default connect(null, { addContent })(AddContent)

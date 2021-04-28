@@ -1,4 +1,4 @@
-import { SET_USER_CONTENT, UPDATE_CONTENT, UPDATE_LIKES, ADD_CONTENT } from '../actions/types'
+import { SET_USER_CONTENT, DELETE_CONTENT, UPDATE_LIKES, ADD_CONTENT } from '../actions/types'
 
 let initialState = {
     userContent: [],
@@ -29,11 +29,10 @@ const contentReducer = (state = initialState, action) => {
                 }),
                 newPosts: action.payload.new_posts
             }
-        case UPDATE_CONTENT:
+        case DELETE_CONTENT:
             return {
                 ...state,
-                userContent: action.payload.updated_content,
-                newPosts: action.payload.new_content
+                newPosts: action.payload.newContent
             }
         case UPDATE_LIKES:
             return {

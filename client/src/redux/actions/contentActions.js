@@ -1,4 +1,5 @@
-import { SET_USER_CONTENT, UPDATE_CONTENT, UPDATE_LIKES, ADD_CONTENT } from './types';
+import { SET_USER_CONTENT, DELETE_CONTENT, UPDATE_LIKES, ADD_CONTENT } from './types';
+import store from '../store'
 
 export const getUserContent = jwt => (dispatch) => {
     fetch('/index', {
@@ -27,9 +28,16 @@ export const deleteContent = request => (dispatch) => {
       })
     .then(res => res.json())
     .then(json => {
+        const deletedContent = json.updated.deleted_content
+        const newContent  = json.updated.new_content
+        const index = store.getState().userContent.userContent.map(e => e.id).indexOf(deletedContent)
+        const updateContent = store.getState().userContent.userContent.splice(index, 1)
+        console.log(updateContent)
          dispatch({
-            type: UPDATE_CONTENT,
-            payload: json.updated
+            type: DELETE_CONTENT,
+            payload: { 
+                newContent: newContent
+            }
         }) 
     })
 }

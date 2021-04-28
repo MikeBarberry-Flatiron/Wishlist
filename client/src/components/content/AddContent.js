@@ -24,7 +24,8 @@ export default class AddContent extends Component {
         })
     }
 
-    handleSubmit = () => {
+    handleSubmit = (e) => {
+        e.preventDefault();
         const addContent = {
             jwt: this.state.jwt,
             description: this.state.description,

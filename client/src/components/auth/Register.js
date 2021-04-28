@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-export default class Register extends Component {
+class Register extends Component {
     constructor() {
         super()
         this.state = {
@@ -32,7 +33,7 @@ export default class Register extends Component {
         .then(res => res.json())
         .then(json => {            
             if (json.status === 201) {
-                window.location = '/homepage'            
+                this.props.history.push('/login')           
             } else {
                 this.setState({
                     errors: json.errors[0]
@@ -62,3 +63,5 @@ export default class Register extends Component {
         )
     }
 }
+
+export default withRouter(Register);

@@ -49,7 +49,6 @@ class HomePage extends Component {
                 })
             }
         })
-
     }
 
     handleLike = (id) => {

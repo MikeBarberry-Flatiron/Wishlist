@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
     constructor() {
@@ -27,6 +28,7 @@ class Login extends Component {
     }
 
     render() {
+        if (this.props.currentUser) return <Redirect to="/homepage" />
         return (
             <div className="authContainer">
                 <h1>Login</h1>
@@ -49,7 +51,8 @@ class Login extends Component {
 
 const mapStateToProps = (state) => { 
     return { 
-     userErrors: state.userErrors.error
+        currentUser: state.currentUser.isAuthenticated,
+        userErrors: state.userErrors.error
     };
 };
 

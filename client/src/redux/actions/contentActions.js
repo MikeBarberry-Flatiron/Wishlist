@@ -1,5 +1,4 @@
-import { SET_USER_CONTENT } from './types';
-import { UPDATE_CONTENT } from './types';
+import { SET_USER_CONTENT, UPDATE_CONTENT, UPDATE_LIKES } from './types';
 
 export const getUserContent = jwt => (dispatch) => {
     fetch('/index', {
@@ -48,6 +47,23 @@ export const addContent = request => (dispatch) => {
         dispatch({
             type: UPDATE_CONTENT,
             payload: json.updated
+        }) 
+    })
+}
+
+export const likeContent = request => (dispatch) => {
+    fetch('/like', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(request)
+    })
+    .then(res => res.json())
+    .then(json => {
+        dispatch({
+            type: UPDATE_LIKES,
+            payload: json.updated_likes
         }) 
     })
 }

@@ -34,7 +34,7 @@ class HomepageController < ApplicationController
         content = Content.find(params[:content_id])
         content.likes += 1
         content.save
-        render json: { :status => 200, :message => "Like Added" }
+        render json: { :status => 200, :message => "Like Added", :updated_likes => new_content }
     end 
 
     private 

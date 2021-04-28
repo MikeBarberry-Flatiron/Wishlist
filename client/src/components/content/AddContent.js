@@ -42,6 +42,7 @@ export default class AddContent extends Component {
           })
         .then(res => res.json())
         .then(json => console.log(json))
+        // no window reload here 
     }
 
     render() {

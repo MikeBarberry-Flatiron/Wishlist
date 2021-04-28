@@ -31,7 +31,7 @@ class HomepageController < ApplicationController
     def delete 
         content = Content.find(params[:content_id])
         content.delete
-        render json: { :status => 200, :message => "Content Deleted" }
+        render json: { :status => 200, :message => "Content Deleted", id: content.id }
     end 
 
     def add 

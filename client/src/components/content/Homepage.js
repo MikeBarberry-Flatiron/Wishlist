@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../redux/actions/authActions'
 import { getUserContent } from '../../redux/actions/contentActions'
+import { deleteContent } from '../../redux/actions/contentActions'
 import UserContent from './UserContent'
 import AddContent from './AddContent'
 import NewPosts from './NewPosts'
@@ -53,18 +54,7 @@ class HomePage extends Component {
 
     handleDelete = (id) => {
         const contentId = { content_id: id }
-        fetch('/delete', {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify(contentId)
-          })
-        .then(res => res.json())
-        .then(json => {
-            console.log(json)
-            window.location.reload()
-        })
+        this.props.deleteContent(contentId)
     }
 
     handleFilter = (e) => {
@@ -103,4 +93,4 @@ class HomePage extends Component {
 
 // don't need to map state to props here because it's getting passed through ProtectedRoute 
 
-export default connect(null, { logoutUser, getUserContent })(HomePage)
+export default connect(null, { logoutUser, getUserContent, deleteContent })(HomePage)

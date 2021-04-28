@@ -23,8 +23,8 @@ class HomepageController < ApplicationController
     def add 
         content = Content.create(description: params[:description], url: params[:url], image: params[:image], category: params[:category], user_id: verify_user.id)
         if content.save 
-            updated_content = verify_user.contents.order(created_at: :asc)
-            render json: {:status => 200, :message => "Content added", :updated => { :updated_content => updated_content, :new_content => new_content} }
+    
+            render json: {:status => 200, :message => "Content added", :updated => { :updated_content => content, :new_content => new_content} }
         else 
             render json: {:status => 400, :errors => content.errors.full_messages}
         end 

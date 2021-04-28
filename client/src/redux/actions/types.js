@@ -3,3 +3,4 @@ export const SET_USER_ERRORS = 'SET_USER_ERRORS';
 export const SET_USER_CONTENT = 'SET_USER_CONTENT';
 export const UPDATE_CONTENT = 'UPDATE_CONTENT';
 export const UPDATE_LIKES = 'UPDATE_LIKES';
+export const ADD_CONTENT = 'ADD_CONTENT';

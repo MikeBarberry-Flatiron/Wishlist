@@ -1,4 +1,4 @@
-import { SET_USER_CONTENT, UPDATE_CONTENT, UPDATE_LIKES } from './types';
+import { SET_USER_CONTENT, UPDATE_CONTENT, UPDATE_LIKES, ADD_CONTENT } from './types';
 
 export const getUserContent = jwt => (dispatch) => {
     fetch('/index', {
@@ -45,7 +45,7 @@ export const addContent = request => (dispatch) => {
     .then(res => res.json())
     .then(json => {
         dispatch({
-            type: UPDATE_CONTENT,
+            type: ADD_CONTENT,
             payload: json.updated
         }) 
     })

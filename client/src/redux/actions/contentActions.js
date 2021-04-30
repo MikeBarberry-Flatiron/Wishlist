@@ -28,11 +28,9 @@ export const deleteContent = request => (dispatch) => {
       })
     .then(res => res.json())
     .then(json => {
-        const deletedContent = json.updated.deleted_content
-        const newContent  = json.updated.new_content
+        const { deletedContent, newContent } = json.updated
         const index = store.getState().userContent.userContent.map(e => e.id).indexOf(deletedContent)
-        const updateContent = store.getState().userContent.userContent.splice(index, 1)
-        console.log(updateContent)
+        store.getState().userContent.userContent.splice(index, 1)
          dispatch({
             type: DELETE_CONTENT,
             payload: { 

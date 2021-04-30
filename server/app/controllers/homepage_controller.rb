@@ -17,7 +17,7 @@ class HomepageController < ApplicationController
         content.delete
 
         # updated_content = verify_user.contents.order(created_at: :asc)
-        render json: { :status => 200, :message => "Content Deleted", :updated => { :deleted_content => content.id, :new_content => new_content} }
+        render json: { :status => 200, :message => "Content Deleted", :updated => { :deletedContent => content.id, :newContent => new_content} }
     end 
 
     def add 

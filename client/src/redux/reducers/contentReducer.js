@@ -32,6 +32,7 @@ const contentReducer = (state = initialState, action) => {
         case DELETE_CONTENT:
             return {
                 ...state,
+                userContent: [...state.userContent.slice(0, action.payload.deleteIndex), ...state.userContent.slice(action.payload.deleteIndex + 1, state.userContent.length)],
                 newPosts: action.payload.newContent
             }
         case UPDATE_LIKES:

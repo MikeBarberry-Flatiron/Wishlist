@@ -30,10 +30,10 @@ export const deleteContent = request => (dispatch) => {
     .then(json => {
         const { deletedContent, newContent } = json.updated
         const index = store.getState().userContent.userContent.map(e => e.id).indexOf(deletedContent)
-        store.getState().userContent.userContent.splice(index, 1)
          dispatch({
             type: DELETE_CONTENT,
             payload: { 
+                deleteIndex: index,
                 newContent: newContent
             }
         }) 

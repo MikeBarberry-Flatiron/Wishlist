@@ -8,6 +8,15 @@
     #logout:hover {
         cursor: pointer; }
 
+#searchBar {
+    position: absolute;
+    top: 27rem;
+    left: 58rem;
+    margin-left: 5px; }
+    #searchBarInput {
+        border-radius: 0.5rem;
+        margin-left: 5px; }
+
 #welcomeMessage {
     position: absolute;
     left: 53rem;

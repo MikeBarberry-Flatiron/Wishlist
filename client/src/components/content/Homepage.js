@@ -4,6 +4,7 @@ import { logoutUser } from '../../redux/actions/authActions'
 import { getUserContent, deleteContent, likeContent } from '../../redux/actions/contentActions'
 import UserContent from './UserContent'
 import AddContent from './AddContent'
+import SearchBar from './SearchBar'
 import NewPosts from './NewPosts'
 import Browse from './Browse'
 import FilterDropdown from './FilterDropdown'
@@ -22,6 +23,7 @@ class HomePage extends Component {
             technologyContent: [],
             householdContent: [],
             newPosts: [],
+            search: '',
             filterOption: 'all'
         }
     }
@@ -48,6 +50,12 @@ class HomePage extends Component {
         this.props.deleteContent(request)
     }
 
+    handleInput = (e)  => {
+        this.setState({
+            search: e.target.value
+        })
+    }
+
     handleFilter = (e) => {
         this.setState({
             filterOption: e.target.value
@@ -55,17 +63,22 @@ class HomePage extends Component {
     }
 
     render() {
-        const { userContent, lifestyleContent, clothingContent, technologyContent, householdContent, newPosts} = this.props.userContent; 
+        const { lifestyleContent, clothingContent, technologyContent, householdContent, newPosts} = this.props.userContent; 
+        const searchData = this.props.userContent.userContent.filter(content => {
+            return  content.description.includes(this.state.search) 
+        })
         const filter = () => {
             switch (this.state.filterOption) {
                 case "lifestyle": return <UserContent  handleDelete={this.handleDelete} content={lifestyleContent} />
                 case "clothing": return <UserContent handleDelete={this.handleDelete} content={clothingContent} />
                 case "technology": return <UserContent handleDelete={this.handleDelete} content={technologyContent} />
                 case "household": return <UserContent handleDelete={this.handleDelete} content={householdContent} />
+                // case "all": return <UserContent handleDelete={this.handleDelete} content={userContent} />
 
-                default: return <UserContent handleDelete={this.handleDelete} content={userContent} />
+                default: return <UserContent handleDelete={this.handleDelete} content={searchData} />
             }
         }
+
         return(
             <div>
                 <h2 id="welcomeMessage">Welcome back, {this.props.currentUser.username}!</h2>
@@ -77,6 +90,7 @@ class HomePage extends Component {
                 <SlidingImage />
                 <NewPosts newPosts={newPosts} handleLike={this.handleLike} />
                 {filter()}
+                <SearchBar searchBar={this.handleInput} />
             </div>
         )
     }

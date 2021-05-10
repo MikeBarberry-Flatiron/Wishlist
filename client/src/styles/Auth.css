@@ -4,7 +4,7 @@
 
 #authButton {
     float: right;
-    margin-right: 29rem;
+    margin-right: 26rem;
     margin-top: 7rem;
     width: 100px;
     height: 40px;
@@ -15,10 +15,9 @@
 .authContainer {
     border: 3px solid black;
     margin: auto;
-    position: flex;
     text-align: center;
     top: 50%;
-    width: 20%; 
+    width: 25%; 
     transform: translateY(70%); }
     .authForm input {
         padding: 1rem;

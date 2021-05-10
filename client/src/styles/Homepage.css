@@ -11,7 +11,7 @@
 #searchBar {
     position: absolute;
     top: 27rem;
-    left: 58rem;
+    left: 45rem;
     margin-left: 5px; }
     #searchBarInput {
         border-radius: 0.5rem;
@@ -19,7 +19,7 @@
 
 #welcomeMessage {
     position: absolute;
-    left: 53rem;
+    left: 45.5rem;
     top: 1rem;
 }        
 #filterDropdownContainer {
@@ -34,7 +34,7 @@
 #browse {
     position: absolute;
     left: 22rem;
-    top: 12.5rem; }
+    top: 14rem; }
     .browseLogo {
         height: 30px;
         width: 90px
@@ -43,12 +43,12 @@
 #yourContent {
     position: absolute;
     float: left;
-    left: 5rem;
+    left: 9rem;
     top: 28rem; }
     .contentContainer {
         position: absolute;
         bottom: 0;
-        max-width: 70%;
+        max-width: 80%;
         margin-left: 2rem;
         top: 33rem;
         display: flex;
@@ -74,13 +74,13 @@
 #newContent {
     font-weight: bold;
     position: absolute;
-    left: 87rem;
+    left: 77rem;
     top: 10rem; 
     float: right; }
     .newContentContainer {
-        position: relative;
+        position: absolute;
         bottom: 19rem;
-        left: 75rem;
+        left: 68rem;
         max-width: 25%;
         margin-left: 3rem;
         margin-top: 9rem;
@@ -101,7 +101,7 @@
 
 #addContentContainer {
     position: relative;
-    top: 14rem;
+    top: 16rem;
     left: 4rem; }
     #addContentForm input {
         border-radius: 3rem;
@@ -127,7 +127,7 @@
     height: 300px;
     background-color: white;
     margin-left: auto;
-    margin-right: 24rem;
+    margin-right: 20rem;
     margin-top: -4rem;
     text-align: center;
     overflow: hidden; }

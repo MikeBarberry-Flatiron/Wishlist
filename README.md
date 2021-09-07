@@ -1,12 +1,9 @@
 ## Wishlist 
-A site to manage your product wishlists across multiple websites. Built with React/Redux frontend and Rails API backend. 
-
+React/Redux on the frontend and Rails API on the back. Users can create an account and keep track of all of the products they are interested in 
+<br>
 |Rails Backend                    |React Frontend   |
 |---------------------------------|-----------------|
-|Install correct version of Ruby  |npm install      |
-|rails db:migrate                 |npm start        |
-|rails db:seed (postgres default) |                 |
+|rails db:migrate                 |npm install      |
+|rails db:seed                    |npm start        |   
 |rails s -p 3001                  |                 |
 
-## Contributing 
-Git clone and open a pull request 

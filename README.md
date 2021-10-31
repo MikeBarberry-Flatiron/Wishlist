@@ -4,6 +4,7 @@ React/Redux on the frontend and Rails API on the back. Users can create an accou
 ![alt text](https://i.imgur.com/AebZavD.png)
 
 <br>
+
 |Rails Backend                    |React Frontend   |
 |---------------------------------|-----------------|
 |rails db:migrate                 |npm install      |

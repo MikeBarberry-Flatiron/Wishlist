@@ -5,7 +5,7 @@ const UserContent =  ({ handleDelete, content }) => {
         <div>
             <h3 id="yourContent">Your Wishlist</h3>
             <div className="contentContainer">
-                {content.map(content => {
+                {content?.map(content => {
                     const cb = () => { handleDelete(content.id) }
                     return <div key={content.id} className="userContent">
                         <button onClick={cb} className="deleteButton">remove</button>

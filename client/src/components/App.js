@@ -8,7 +8,7 @@ import { getUserContent } from '../redux/actions/contentActions';
 
 import ProtectedRoute from './ProtectedRoute'
 import AuthPage from './auth/AuthPage'
-import HomePage from './content/HomePage.js'
+import HomePage from './content/Homepage.js'
 
 if (localStorage.jwt) {
     const jwt = localStorage.jwt 

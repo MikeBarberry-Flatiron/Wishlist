@@ -6,7 +6,7 @@ const NewPosts = ({ newPosts, handleLike }) => {
         <div>
             <h3 id="newContent">New Posts</h3>
             <div className="newContentContainer">
-                {newPosts.map(post => {
+                {newPosts?.map(post => {
                     const cb = () => { handleLike(post.id) }
                     return <div key={post.id} className="newContent">
                         <h2>{post.user}</h2>

@@ -64,7 +64,7 @@ class HomePage extends Component {
 
     render() {
         const { lifestyleContent, clothingContent, technologyContent, householdContent, newPosts} = this.props.userContent; 
-        const searchData = this.props.userContent.userContent.filter(content => {
+        const searchData = this.props.userContent.userContent?.filter(content => {
             return  content.description.includes(this.state.search) 
         })
         const filter = () => {

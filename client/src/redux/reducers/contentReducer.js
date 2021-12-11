@@ -15,16 +15,16 @@ const contentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userContent: action.payload.user_content,
-                lifestyleContent: action.payload.user_content.filter(content => {
+				lifestyleContent: action.payload.user_content?.filter(content => {
                     return  content.category === "lifestyle"
                 }),
-                clothingContent: action.payload.user_content.filter(content => {
+                clothingContent: action.payload.user_content?.filter(content => {
                     return  content.category === "clothing"
                 }),
-                technologyContent: action.payload.user_content.filter(content => {
+                technologyContent: action.payload.user_content?.filter(content => {
                     return  content.category === "technology"
                 }),
-                householdContent: action.payload.user_content.filter(content => {
+                householdContent: action.payload.user_content?.filter(content => {
                     return  content.category === "household"
                 }),
                 newPosts: action.payload.new_posts

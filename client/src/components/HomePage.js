@@ -1,30 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { logoutUser } from '../../redux/actions/authActions'
-import { getUserContent, deleteContent, likeContent } from '../../redux/actions/contentActions'
-import UserContent from './UserContent'
-import AddContent from './AddContent'
-import SearchBar from './SearchBar'
-import NewPosts from './NewPosts'
-import Browse from './Browse'
-import FilterDropdown from './FilterDropdown'
-import SlidingImage from './SlidingImage'
-import WishListLogo from '../../assets/wishlist_logo.png'
-import '../../styles/Homepage.css'
+import { logoutUser } from '../redux/actions/authActions'
+import { getUserContent, deleteContent, likeContent } from '../redux/actions/contentActions'
+import { AddContent, Browse, FilterDropdown, NewPosts, SearchBar, SlidingImage, UserContent } from './content'
+import WishListLogo from '../assets/wishlist_logo.png'
+import '../styles/Homepage.css'
 
 class HomePage extends Component {
     constructor() {
         super()
         this.state = {
             jwt: localStorage.getItem('jwt'),
-            userContent: [],
-            lifestyleContent: [],
-            clothingContent: [],
-            technologyContent: [],
-            householdContent: [],
-            newPosts: [],
             search: '',
-            filterOption: 'all'
+            filterOption: undefined
         }
     }
 
@@ -73,7 +61,6 @@ class HomePage extends Component {
                 case "clothing": return <UserContent handleDelete={this.handleDelete} content={clothingContent} />
                 case "technology": return <UserContent handleDelete={this.handleDelete} content={technologyContent} />
                 case "household": return <UserContent handleDelete={this.handleDelete} content={householdContent} />
-                // case "all": return <UserContent handleDelete={this.handleDelete} content={userContent} />
 
                 default: return <UserContent handleDelete={this.handleDelete} content={searchData} />
             }

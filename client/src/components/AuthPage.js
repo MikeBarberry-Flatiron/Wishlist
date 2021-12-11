@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import Login from './Login'
-import Register from './Register'
-import AuthToggle from './AuthToggle'
-import WishlistLogo from '../../assets/wishlist_logo.png'
-import '../../styles/Auth.css'
-import { loginUser } from '../../redux/actions/authActions';
+import { AuthToggle, Login, Register } from './auth'
+import WishlistLogo from '../assets/wishlist_logo.png'
+import '../styles/Auth.css'
+import { loginUser } from '../redux/actions/authActions';
 import { connect } from 'react-redux';
 
 class AuthPage extends Component {

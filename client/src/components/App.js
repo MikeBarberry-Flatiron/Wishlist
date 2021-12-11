@@ -6,9 +6,9 @@ import store from '../redux/store.js'
 import { SET_CURRENT_USER } from '../redux/actions/types';
 import { getUserContent } from '../redux/actions/contentActions';
 
+import AuthPage from './AuthPage'
+import HomePage from './HomePage.js'
 import ProtectedRoute from './ProtectedRoute'
-import AuthPage from './auth/AuthPage'
-import HomePage from './content/HomePage.js'
 
 if (localStorage.jwt) {
     const jwt = localStorage.jwt 

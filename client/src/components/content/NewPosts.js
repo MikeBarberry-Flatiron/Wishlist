@@ -1,5 +1,5 @@
 import React from 'react'
-import LikeButton from './LikeButton'
+import { LikeButton } from '../content'
 
 const NewPosts = ({ newPosts, handleLike }) => {
     return(

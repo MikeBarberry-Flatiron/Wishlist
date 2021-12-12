@@ -6,7 +6,7 @@ import store from './store'
 import { SET_CURRENT_USER } from './store/actions/types';
 import { getUserContent } from './store/actions/contentActions';
 
-import { AuthPage, HomePage, ProtectedRoute } from './components' 
+import { Home, Login, ProtectedRoute, Register} from './components' 
 
 if (localStorage.jwt) {
     const jwt = localStorage.jwt 
@@ -26,10 +26,10 @@ function App() {
     return (
       <Provider store={store}>
         <Router>
-          <Route exact path ="/" component={AuthPage} />
-          <Route exact path ="/login" component={AuthPage} />
-          <Route exact path ="/register" component={AuthPage} />
-          <ProtectedRoute exact path ="/homepage" component={HomePage} />
+          <Route exact path ="/" component={Login} />
+          <Route exact path ="/login" component={Login} />
+          <Route exact path ="/register" component={Register} />
+          <ProtectedRoute exact path ="/home" component={Home} />
         </Router>
       </Provider>
     );

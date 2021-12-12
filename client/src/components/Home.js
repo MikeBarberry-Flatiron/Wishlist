@@ -6,7 +6,7 @@ import { AddContent, Browse, FilterDropdown, NewPosts, SearchBar, SlidingImage, 
 import WishListLogo from '../assets/wishlist_logo.png'
 import '../styles/Homepage.css'
 
-class HomePage extends Component {
+class Home extends Component {
     constructor() {
         super()
         this.state = {
@@ -85,4 +85,4 @@ class HomePage extends Component {
 
 // don't need to map state to props here because it's getting passed through ProtectedRoute 
 
-export default connect(null, { logoutUser, getUserContent, deleteContent, likeContent })(HomePage)
+export default connect(null, { logoutUser, getUserContent, deleteContent, likeContent })(Home)

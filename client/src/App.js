@@ -2,13 +2,11 @@ import jwt_decode from 'jwt-decode'
 
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from '../redux/store.js'
-import { SET_CURRENT_USER } from '../redux/actions/types';
-import { getUserContent } from '../redux/actions/contentActions';
+import store from './store'
+import { SET_CURRENT_USER } from './store/actions/types';
+import { getUserContent } from './store/actions/contentActions';
 
-import AuthPage from './AuthPage'
-import HomePage from './HomePage.js'
-import ProtectedRoute from './ProtectedRoute'
+import { AuthPage, HomePage, ProtectedRoute } from './components' 
 
 if (localStorage.jwt) {
     const jwt = localStorage.jwt 

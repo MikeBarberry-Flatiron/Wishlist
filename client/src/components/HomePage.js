@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { logoutUser } from '../redux/actions/authActions'
-import { getUserContent, deleteContent, likeContent } from '../redux/actions/contentActions'
+import { logoutUser } from '../store/actions/authActions'
+import { getUserContent, deleteContent, likeContent } from '../store/actions/contentActions'
 import { AddContent, Browse, FilterDropdown, NewPosts, SearchBar, SlidingImage, UserContent } from './content'
 import WishListLogo from '../assets/wishlist_logo.png'
 import '../styles/Homepage.css'

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { AuthToggle, Login, Register } from './auth'
 import WishlistLogo from '../assets/wishlist_logo.png'
 import '../styles/Auth.css'
-import { loginUser } from '../redux/actions/authActions';
 import { connect } from 'react-redux';
+import { loginUser } from '../store/actions/authActions';
 
 class AuthPage extends Component {
     constructor() {

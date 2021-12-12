@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addContent } from '../../redux/actions/contentActions'
+import { addContent } from '../../store/actions/contentActions'
 import { connect } from 'react-redux';
 
 
@@ -8,10 +8,10 @@ class AddContent extends Component {
         super()
         this.state = {
             jwt: localStorage.getItem('jwt'),
-            description: '',
-            url: '',
-            image: '',
-            category: ''
+            description: null,
+            url: null,
+            image: null,
+            category: null
         }
     }
 

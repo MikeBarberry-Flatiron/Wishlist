@@ -1,5 +1,5 @@
 import { SET_USER_CONTENT, DELETE_CONTENT, UPDATE_LIKES, ADD_CONTENT } from './types';
-import store from '../store'
+import store from '../../store'
 
 export const getUserContent = jwt => (dispatch) => {
     fetch('/index', {

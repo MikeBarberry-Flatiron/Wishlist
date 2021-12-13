@@ -1,30 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-
 import { logoutUser } from '../store/actions/authActions'
 import { getUserContent, deleteContent } from '../store/actions/contentActions'
 
-import { UserContent, SearchBar } from './content'
-import WishListLogo from '../assets/wishlist_logo.png'
-
-import '../styles/Homepage.css' 
-import { makeStyles } from "@material-ui/core/styles";
-import { Button } from '@material-ui/core';
-
-
-const useStyles = makeStyles(() => ({
-    logoHome: {
-      maxHeight: "100px",
-      maxWidth: "60px",
-      position: "relative",
-      float: "right",
-      right: "3rem"
-    }
-}));
-
 const Home = (props) => {
-    const classes = useStyles();
-
     const jwt = localStorage.getItem("jwt");
 
     const { getUserContent, userContent } = props
@@ -62,12 +41,7 @@ const Home = (props) => {
     
 
     return(
-        <div>
-            <img src={WishListLogo} alt="wishlist-logo" className={classes.logoHome}></img>
-            <SearchBar searchBar={handleInput} /> 
-            <Button onClick={handleLogout}>Logout</Button>
-            <UserContent content={searchResults} searchBar={handleInput} handleDelete={handleDelete}/>
-        </div>
+       <p>Hello</p>
     )
 }
 

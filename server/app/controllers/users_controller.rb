@@ -6,7 +6,7 @@ class UsersController < ApplicationController
         if user.save 
             render json: {:status => 201, :message => "User registered"}
         else 
-            render json: {:status => 400, :errors => user.errors.full_messages}
+            render json: {:status => 500, :errors => user.errors.full_messages}
         end 
     end 
 

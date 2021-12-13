@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import '../styles/Auth.css'
+import { useHistory } from 'react-router-dom';
+import { Box, TextField, Button, Link as MUILink } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import WishlistLogo from '../assets/wishlist_logo.png'
+
+const theme = createTheme({
+    typography: {
+      fontFamily: 'Raleway'
+    }
+});
 
 const Register = () => {
     const history = useHistory()
 
     const [credentials,setCredentials] = useState({
         username: '',
-        password: ''
+        password: '',
+        password2: ''
     });
-    const [errors,setErrors] = useState('')
+
+    // errors one is a server error - username taken
+    const [errors,setErrors] = useState(null)
+    const [passErrors,setPassErrors] = useState(null)
 
     const handleInput = (e)  => {
         setCredentials({
@@ -22,6 +32,7 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (credentials.password !== credentials.password2) return setPassErrors('Passwords don\'t match')
         const register = {
             username: credentials.username, 
             password: credentials.password
@@ -35,7 +46,7 @@ const Register = () => {
           })
         .then(res => res.json())
         .then(json => {            
-            if (!json.status === 400) {
+            if (!json.status === 500) {
                 history.push("/login")           
             } else {
                setErrors(json.errors[0])
@@ -45,25 +56,46 @@ const Register = () => {
     };
 
     return (
-        <>
-            <img id="logo" src={WishlistLogo} alt="wishlist-logo"></img>
-            <div className="authContainer">
-                <h1>Register</h1>
-                <form className="authForm" onSubmit={handleSubmit}>
-                    <label htmlFor="username">username:
-                        <input type="text" name="username" onChange={e => handleInput(e)} value={credentials.username} required /><br />
-                    </label>
-                    <label htmlFor="password">password:
-                        <input type="password" name="password" onChange={e => handleInput(e)} value={credentials.password} required /><br />
-                    </label>
-                    {errors && 
-                        <p class="errorMessage">{errors} </p>
-                    }
-                    <input type="submit" value="submit"/>
-                </form>
-                <p>Already Have An Account? <Link to="/login">Log In</Link></p>
-            </div>
-        </>
+        <Box sx={{width: '100%', minHeight: '100vh', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+            <Box sx={{ height: '50vw', width: '90vw', backgroundColor: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundImage: "linear-gradient(270deg, rgba(176, 42, 42, 0.16) 0%,rgba(176, 42, 42, 0.56) 18.45%,rgba(176, 42, 42, 0.8) 49.67%,rgba(176, 42, 42, 0.56) 82.52%,rgba(176, 42, 42, 0.196364) 99.7%,rgba(189, 40, 40, 0) 99.71%,rgba(203, 56, 55, 0) 99.72%,rgba(203, 56, 55, 0.16) 99.73%),url('https://static.npmjs.com/attachments/ck3uwdslwmr4gc9740vqxa800-bg-teams.png')"}}>
+                <Box sx={{ height: '80%', width: '40%', backgroundColor: 'white', border: 'solid', borderRadius: '4rem', borderColor: '#a1caf1', borderWidth: '1em', display: 'grid', gridTemplateColumns: 'repeat(1, 60%)', justifyContent: 'center', alignItems: 'center', margin: '20px', paddingTop: "4vw", paddingBottom: "7vw" }}>
+                    <TextField
+                        error={!!errors}
+                        required
+                        label="Username"
+                        defaultValue="Enter your username"
+                        value={credentials.username}
+                        onChange={handleInput}
+                        name="username"
+                        helperText={errors}
+                    />
+                     <TextField
+                        required
+                        type="password"
+                        label="Password"
+                        defaultValue="Enter your password"
+                        value={credentials.password}
+                        onChange={handleInput}
+                        name="password"
+                    />
+                    <TextField
+                        error={!!passErrors}
+                        required
+                        type="password"
+                        label="Repeat Password"
+                        defaultValue="Enter your password again"
+                        value={credentials.password2}
+                        onChange={handleInput}
+                        name="password2"
+                        helperText={passErrors}
+                    />
+                    <Button onClick={handleSubmit} variant="contained">Submit</Button>
+                    <ThemeProvider theme={theme}>
+                        <MUILink href='/login' style={{paddingLeft: '2vw', fontFamily: "Raleway", fontWeight: 300}}>Already Have an Account? Login</MUILink>
+                    </ThemeProvider>
+                </Box>
+            </Box>
+        </Box>
     )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled  from 'styled-components'
-import { Delete } from '@material-ui/icons'
+import { Delete } from '@mui/icons-material'
 
 
 const OuterContainer = styled.div`

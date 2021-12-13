@@ -1,17 +1,27 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { loginUser } from '../store/actions/authActions';
-import '../styles/Auth.css'
 
-import WishlistLogo from '../assets/wishlist_logo.png'
+import { Box, TextField, Button, Paper, Link as MUILink } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import Blob from '../assets/blob.png'
+import Blob2 from '../assets/blob2.png'
+
+const theme = createTheme({
+    typography: {
+      fontFamily: 'Raleway'
+    }
+});
 
 const Login = (props) => {
     const [credentials,setCredentials] = useState({
         username: '',
         password: ''
     });    
+
+    if (props.currentUser) return <Redirect to="/home" />
 
     const handleInput = (e)  => {
         setCredentials({
@@ -30,27 +40,39 @@ const Login = (props) => {
     };
 
     return (
-        props.currentUser ?  <Redirect to="/home" /> : (
-        <>
-        <img id="logo" src={WishlistLogo} alt="wishlist-logo"></img>
-        <div className="authContainer">
-            <h1>Login</h1>
-            <form className="authForm" onSubmit={handleSubmit}>
-                <label htmlFor="username">username:
-                    <input type="text" name="username" onChange={e => handleInput(e)} value={credentials.username} required /><br />
-                </label>
-                <label htmlFor="password">password:
-                    <input type="password" name="password" onChange={e => handleInput(e)} value={credentials.password} required /><br />
-                </label>
-                {props.userErrors && 
-                    <p class="errorMessage">{props.userErrors} </p>
-                }
-                <input type="submit" value="submit"/>
-            </form>
-            <p>Don't Have An Account? <Link to="/register">Register</Link></p>
-        </div>
-        </>
-        )
+        <Box sx={{width: '100%', minHeight: '100vh', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+            <Paper variant="outlined">
+                <img src={Blob2} alt="blob" style={{position: 'absolute', left: 0, bottom: '14vw', width: '25vw'}} />
+            </Paper>
+            <Paper variant="outlined">
+                <img src={Blob} alt="blob" style={{position: 'absolute', right: 0, top: '16vw', width: '25vw'}} />
+            </Paper>
+            <Box sx={{width: '400px', height: '400px ', backgroundColor: '#a1caf1', display: 'grid', gridTemplateColumns: 'repeat(1, 60%)', justifyContent: 'center', alignItems: 'center', margin: '20px', boxShadow: '10px 5px 5px #92a1cf', paddingTop: "20px", paddingBottom: "10px" }}>
+                <TextField
+                    required
+                    label="Username"
+                    defaultValue="Enter your username"
+                    value={credentials.username}
+                    onChange={handleInput}
+                    name="username"
+                />
+                 <TextField
+                    error={!!props.userErrors}
+                    required
+                    type="password"
+                    label="Password"
+                    defaultValue="Enter your password"
+                    value={credentials.password}
+                    onChange={handleInput}
+                    name="password"
+                    helperText={props.userErrors}
+                />
+                <Button onClick={handleSubmit} variant="contained">Submit</Button>
+                <ThemeProvider theme={theme}>
+                    <MUILink href='/register' style={{fontFamily: 'Raleway', fontWeight: 300}}>Don't Have an Account? Register</MUILink>
+                </ThemeProvider>
+            </Box>
+        </Box>
     );
 };
 

@@ -1,13 +1,49 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+
 import { logoutUser } from '../store/actions/authActions'
 import { getUserContent, deleteContent, likeContent } from '../store/actions/contentActions'
-import { AddContent, Browse, FilterDropdown, NewPosts, SearchBar, SlidingImage, UserContent } from './content'
-import WishListLogo from '../assets/wishlist_logo.png'
-import '../styles/Homepage.css'
 
-class Home extends Component {
-    constructor() {
+import { UserContent, SearchBar } from './content'
+import WishListLogo from '../assets/wishlist_logo.png'
+
+import '../styles/Homepage.css' 
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+    logoHome: {
+      maxHeight: "100px",
+      maxWidth: "60px",
+      position: "relative",
+      float: "right",
+      right: "3rem"
+    }
+}));
+
+
+
+const Home = (props) => {
+    const classes = useStyles();
+
+    const jwt = localStorage.getItem("jwt");
+
+    const { getUserContent, userContent } = props
+
+    const [search,setSearch] = useState('')
+    const [searchResults,setSearchResults] = useState([])
+
+    useEffect(() => {
+        const token = { jwt: jwt }
+        getUserContent(token)
+    }, [getUserContent, jwt])
+
+    useEffect(() => {
+        const searchContent = userContent.userContent.filter(item  => {
+            return item.description.includes(search)
+        })
+        setSearchResults(searchContent)
+    }, [search, userContent.userContent])
+    /* constructor() {
         super()
         this.state = {
             jwt: localStorage.getItem('jwt'),
@@ -37,12 +73,11 @@ class Home extends Component {
         }
         this.props.deleteContent(request)
     }
-
-    handleInput = (e)  => {
-        this.setState({
-            search: e.target.value
-        })
-    }
+    */ 
+    const handleInput = (e)  => {
+        setSearch(e.target.value)
+    };
+    /*
 
     handleFilter = (e) => {
         this.setState({
@@ -64,11 +99,13 @@ class Home extends Component {
 
                 default: return <UserContent handleDelete={this.handleDelete} content={searchData} />
             }
-        }
+        } */
+
+       
 
         return(
             <div>
-                <h2 id="welcomeMessage">Welcome back, {this.props.currentUser.username}!</h2>
+               {/*  <h2 id="welcomeMessage">Welcome back, {this.props.currentUser.username}!</h2>
                 <button id="logout" onClick={this.handleClick}>logout</button>
                 <img id="logo" src={WishListLogo} alt="wishlist-logo"></img>
                 <FilterDropdown handleFilter={this.handleFilter} />
@@ -76,11 +113,13 @@ class Home extends Component {
                 <Browse />
                 <SlidingImage />
                 <NewPosts newPosts={newPosts} handleLike={this.handleLike} />
-                {filter()}
-                <SearchBar searchBar={this.handleInput} />
+                {filter()} */}
+                <img id="logo" src={WishListLogo} alt="wishlist-logo" className={classes.logoHome}></img>
+                <SearchBar searchBar={handleInput} /> 
+                <UserContent content={searchResults} searchBar={handleInput} />
             </div>
         )
-    }
+    // }
 }
 
 // don't need to map state to props here because it's getting passed through ProtectedRoute 

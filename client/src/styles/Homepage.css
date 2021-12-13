@@ -8,15 +8,6 @@
     #logout:hover {
         cursor: pointer; }
 
-#searchBar {
-    position: absolute;
-    top: 27rem;
-    left: 45rem;
-    margin-left: 5px; }
-    #searchBarInput {
-        border-radius: 0.5rem;
-        margin-left: 5px; }
-
 #welcomeMessage {
     position: absolute;
     left: 45.5rem;
@@ -45,7 +36,7 @@
     float: left;
     left: 9rem;
     top: 28rem; }
-    .contentContainer {
+   /*  .contentContainer {
         position: absolute;
         bottom: 0;
         max-width: 80%;
@@ -54,22 +45,22 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        justify-content: center; }
-        .userContent {
+        justify-content: center; } */
+       /*  .userContent {
             border: 1px solid black;
             margin: 0 15px 15px 0;
             padding: 1rem 3rem 1rem 3rem; 
             justify-content: center;
             text-align: center;
-            flex-direction: inherit; }
-            .deleteButton {
+            flex-direction: inherit; } */
+            /* .deleteButton {
                 color: red;
-                border-radius: 0.5rem; }
-                .deleteButton:hover {
-                    cursor: pointer; }
-                    .contentImage {
+                border-radius: 0.5rem; } */
+               /*  .deleteButton:hover {
+                    cursor: pointer; } */
+                   /*  .contentImage {
                         width: 170px;
-                        height: 190px; }
+                        height: 190px; } */
 
 #newContent {
     font-weight: bold;

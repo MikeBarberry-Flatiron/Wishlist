@@ -1,10 +1,19 @@
 import React from 'react';
+import { TextField } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(() => ({
+    input: {
+      paddingBottom: "30px",
+      marginLeft: "3rem"
+    }
+}));
+
 
  const SearchBar = ({ searchBar}) => {
+    const classes = useStyles();
     return (
-        <label id="searchBar" htmlFor="search">search:
-            <input id="searchBarInput" type="search" name="search" onChange={searchBar} />
-        </label>
+        <TextField id="standard-basic" label="Search" variant="standard" onChange={searchBar} className={classes.input}/>
     )
 }
 

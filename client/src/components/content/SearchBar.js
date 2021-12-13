@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
     input: {
       paddingBottom: "30px",
-      marginLeft: "3rem"
+      marginLeft: "2.5rem"
     }
 }));
 

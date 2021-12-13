@@ -3,16 +3,6 @@
     left: 43%;
 }
 
-#authButton {
-    float: right;
-    margin-right: 26rem;
-    margin-top: 7rem;
-    width: 100px;
-    height: 40px;
-    border-radius: 1rem; }
-    #authButton:hover {
-        cursor: pointer; }
-
 .authContainer {
     border: 3px solid black;
     margin: auto;

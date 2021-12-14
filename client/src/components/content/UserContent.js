@@ -7,7 +7,7 @@ import { Delete } from '@mui/icons-material'
 
 const UserContent =  ({ handleDelete, content }) => {
     
-    const [open,setOpen] = useState(true)
+    const [open,setOpen] = useState(false)
     
     const handleOpen = () => {
         setOpen(true)

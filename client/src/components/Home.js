@@ -125,7 +125,7 @@ const Home = (props) => {
            </Box>
            <Box sx={{position: 'relative'}}>
                 <Box sx={{position: 'absolute', right: '7%'}}>
-                    <Button onClick={handleShowMoreData} variant="contained" sx={{marginBottom: '5px'}}>Show Next Row</Button>
+                    <Button onClick={handleShowMoreData} variant="contained" sx={{marginBottom: '5px'}} disabled={searchResults.length < data}>Show Next Row</Button>
                 </Box>
            </Box>
           

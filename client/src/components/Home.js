@@ -23,6 +23,7 @@ const Home = (props) => {
         image: ''
     });
     const [data, setData] = useState(8)
+    const [show,setShow] = useState(true)
  
     useEffect(() => {
         const token = { jwt: jwt }
@@ -36,6 +37,14 @@ const Home = (props) => {
         const dataToShow = searchContent.slice(0, data)
         setSearchResults(dataToShow)
     }, [search, userContent.userContent, data]);
+
+    useEffect(() => {
+        if (userContent.userContent.length <= data) {
+            setShow(true)
+        } else {
+            setShow(false)
+        }
+    }, [userContent, data])
 
     const handleLogout = () => {
         logoutUser()
@@ -79,7 +88,6 @@ const Home = (props) => {
             image: ''
         })
     };
-    
 
     return(
        <Box sx={{width: '100vw', height: '100vh', backgroundColor: '#ff6347', overflowY: 'scroll'}}>
@@ -125,7 +133,7 @@ const Home = (props) => {
            </Box>
            <Box sx={{position: 'relative'}}>
                 <Box sx={{position: 'absolute', right: '7%'}}>
-                    <Button onClick={handleShowMoreData} variant="contained" sx={{marginBottom: '5px'}} disabled={searchResults.length < data}>Show Next Row</Button>
+                    <Button onClick={handleShowMoreData} variant="contained" sx={{marginBottom: '5px'}} disabled={show}>Show Next Row</Button>
                 </Box>
            </Box>
           

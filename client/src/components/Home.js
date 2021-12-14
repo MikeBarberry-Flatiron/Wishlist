@@ -22,7 +22,8 @@ const Home = (props) => {
         description: '',
         image: ''
     });
-
+    const [data, setData] = useState(8)
+ 
     useEffect(() => {
         const token = { jwt: jwt }
         getUserContent(token)
@@ -32,11 +33,16 @@ const Home = (props) => {
         const searchContent = userContent.userContent.filter(item  => {
             return item.title.toLowerCase().includes(search.toLowerCase())
         })
-        setSearchResults(searchContent)
-    }, [search, userContent.userContent]);
+        const dataToShow = searchContent.slice(0, data)
+        setSearchResults(dataToShow)
+    }, [search, userContent.userContent, data]);
 
     const handleLogout = () => {
         logoutUser()
+    };
+
+    const handleShowMoreData = () => {
+        setData(data + 4)
     };
 
     const handleDelete = (id) => {
@@ -114,9 +120,15 @@ const Home = (props) => {
                     <SearchBar searchBar={handleSearch} />
                 </Box>
            </Box>
-           <Box sx={{paddingTop: '3em', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
+           <Box sx={{paddingTop: '3em', display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '10px', maxWidth: '100%', paddingLeft: '20px' }}>
                 <UserContent content={searchResults} handleDelete={handleDelete} />
            </Box>
+           <Box sx={{position: 'relative'}}>
+                <Box sx={{position: 'absolute', right: '7%'}}>
+                    <Button onClick={handleShowMoreData}variant="contained" sx={{marginBottom: '5px'}}>Load More Data</Button>
+                </Box>
+           </Box>
+          
        </Box>
     );
 };

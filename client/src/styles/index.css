@@ -1,11 +1,5 @@
 *, :after, :before {
     box-sizing: border-box;
-}
-
-html {
-    padding: 0;
-}
-
-body {
     margin: 0;
+    padding: 0;
 }

@@ -82,7 +82,7 @@ const Home = (props) => {
     
 
     return(
-       <Box sx={{width: '100vw', height: '100vh', backgroundColor: 'red', overflowY: 'scroll'}}>
+       <Box sx={{width: '100vw', height: '100vh', backgroundColor: '#ff6347', overflowY: 'scroll'}}>
            <Box sx={{position: 'sticky', top: 0, height: '17pc', width: '100%', backgroundColor: 'white', display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '1em', borderBottom: '4mm ridge rgb(170, 50, 220, .6)', zIndex: 3}}>
                 <Box sx={{gridColumnStart: 1, display: 'flex',  justifyContent: 'center', alignSelf: 'end', paddingBottom: '25px'}}>
                     <Button variant="outlined" onClick={handleLogout} >
@@ -125,7 +125,7 @@ const Home = (props) => {
            </Box>
            <Box sx={{position: 'relative'}}>
                 <Box sx={{position: 'absolute', right: '7%'}}>
-                    <Button onClick={handleShowMoreData}variant="contained" sx={{marginBottom: '5px'}}>Load More Data</Button>
+                    <Button onClick={handleShowMoreData} variant="contained" sx={{marginBottom: '5px'}}>Show Next Row</Button>
                 </Box>
            </Box>
           

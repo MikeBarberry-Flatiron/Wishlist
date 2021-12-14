@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { loginUser } from '../store/actions/authActions';
 
-import { Box, TextField, Button, Paper, Link as MUILink } from '@mui/material';
+import { Box, TextField, Button, Paper, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Blob from '../assets/blob.png'
@@ -69,7 +69,7 @@ const Login = (props) => {
                 />
                 <Button onClick={handleSubmit} variant="contained">Submit</Button>
                 <ThemeProvider theme={theme}>
-                    <MUILink href='/register' style={{fontFamily: 'Raleway', fontWeight: 300}}>Don't Have an Account? Register</MUILink>
+                    <Typography variant='subtitle1' color="text.secondary" style={{fontFamily: 'Raleway', fontWeight: 300}}>Don't Have an Account? <Link to="/register">Register</Link></Typography>
                 </ThemeProvider>
             </Box>
         </Box>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Box, TextField, Button, Link as MUILink } from '@mui/material';
+import { useHistory, Link } from 'react-router-dom';
+import { Box, TextField, Button, Typography} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
@@ -91,7 +91,7 @@ const Register = () => {
                     />
                     <Button onClick={handleSubmit} variant="contained">Submit</Button>
                     <ThemeProvider theme={theme}>
-                        <MUILink href='/login' style={{paddingLeft: '2vw', fontFamily: "Raleway", fontWeight: 300}}>Already Have an Account? Login</MUILink>
+                        <Typography variant='subtitle1' color="text.secondary" style={{paddingLeft: '2vw', fontFamily: "Raleway", fontWeight: 300}}>Already Have an Account? <Link to="/login">Login</Link></Typography>
                     </ThemeProvider>
                 </Box>
             </Box>

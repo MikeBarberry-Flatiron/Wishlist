@@ -21,7 +21,7 @@ class HomepageController < ApplicationController
     end 
 
     def add 
-        content = Content.create(description: params[:description], url: params[:url], image: params[:image], category: params[:category], user_id: verify_user.id)
+        content = Content.create(title: params[:title], image: params[:image], description: params[:description], user_id: verify_user.id)
         if content.save 
     
             render json: {:status => 200, :message => "Content added", :updated => { :updated_content => content, :new_content => new_content} }

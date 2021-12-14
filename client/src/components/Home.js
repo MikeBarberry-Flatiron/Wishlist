@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+
 import { logoutUser } from '../store/actions/authActions'
-import { getUserContent, deleteContent } from '../store/actions/contentActions'
+import { getUserContent, deleteContent, addContent } from '../store/actions/contentActions'
+
+import { Box, TextField, Button } from '@mui/material';
+import { ExitToApp } from '@mui/icons-material'
+
+
+import { SearchBar, UserContent } from './content'
 
 const Home = (props) => {
     const jwt = localStorage.getItem("jwt");
 
-    const { getUserContent, userContent } = props
+    const { getUserContent, userContent, addContent, logoutUser, deleteContent } = props;
 
     const [search,setSearch] = useState('')
     const [searchResults,setSearchResults] = useState([])
+    const [newContent, setNewContent] = useState({
+        title: '',
+        description: '',
+        image: ''
+    });
 
     useEffect(() => {
         const token = { jwt: jwt }
@@ -18,13 +30,13 @@ const Home = (props) => {
 
     useEffect(() => {
         const searchContent = userContent.userContent.filter(item  => {
-            return item.description.includes(search)
+            return item.title.toLowerCase().includes(search.toLowerCase())
         })
         setSearchResults(searchContent)
     }, [search, userContent.userContent]);
 
     const handleLogout = () => {
-        props.logoutUser()
+        logoutUser()
     };
 
     const handleDelete = (id) => {
@@ -32,19 +44,83 @@ const Home = (props) => {
             content_id: id,
             jwt: jwt
         }
-        props.deleteContent(request)
+        deleteContent(request)
     }
      
-    const handleInput = (e)  => {
+    const handleSearch = (e)  => {
         setSearch(e.target.value)
+    };
+
+    const handleInput = (e)  => {
+        setNewContent({
+            ...newContent,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const content = {
+            jwt: jwt,
+            title: newContent.title,
+            description: newContent.description,
+            image: newContent.image,
+        }
+        addContent(content)
+        setNewContent({
+            title: '',
+            description: '',
+            image: ''
+        })
     };
     
 
     return(
-       <p>Hello</p>
-    )
-}
+       <Box sx={{width: '100vw', height: '100vh', backgroundColor: 'red', overflowY: 'scroll'}}>
+           <Box sx={{position: 'sticky', top: 0, height: '17pc', width: '100%', backgroundColor: 'white', display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '1em', borderBottom: '4mm ridge rgb(170, 50, 220, .6)', zIndex: 3}}>
+                <Box sx={{gridColumnStart: 1, display: 'flex',  justifyContent: 'center', alignSelf: 'end', paddingBottom: '25px'}}>
+                    <Button variant="outlined" onClick={handleLogout} >
+                        Logout <ExitToApp  />
+                    </Button>
+                </Box>
+                <Box sx={{paddingTop: '20px', display: 'flex', flexDirection: 'column', gap: '5px',  gridColumn: 'span 2 / span 2', gridColumnStart: 2}}>
+                        <TextField
+                            required
+                            label="Title"
+                            defaultValue="Enter product title"
+                            value={newContent.title}
+                            onChange={handleInput}
+                            name="title"
+                        />
+                        <TextField
+                            required
+                            label="Description"
+                            defaultValue="Enter product description"
+                            value={newContent.description}
+                            onChange={handleInput}
+                            name="description"
+                        />
+                        <TextField
+                            required
+                            label="Image"
+                            defaultValue="Enter link to product image"
+                            value={newContent.image}
+                            onChange={handleInput}
+                            name="image"
+                        />
+                        <Button variant="contained" onClick={handleSubmit}>Submit</Button>
+                </Box>
+                <Box sx={{gridColumnStart: 4, display: 'flex', justifyContent: 'center', alignSelf: 'end', paddingBottom: '25px'}}>
+                    <SearchBar searchBar={handleSearch} />
+                </Box>
+           </Box>
+           <Box sx={{paddingTop: '3em', display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <UserContent content={searchResults} handleDelete={handleDelete} />
+           </Box>
+       </Box>
+    );
+};
 
 // don't need to map state to props here because it's getting passed through ProtectedRoute 
 
-export default connect(null, { logoutUser, getUserContent, deleteContent })(Home)
+export default connect(null, { logoutUser, getUserContent, deleteContent, addContent })(Home);

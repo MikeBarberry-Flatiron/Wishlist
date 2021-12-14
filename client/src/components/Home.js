@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../store/actions/authActions'
 import { getUserContent, deleteContent, addContent } from '../store/actions/contentActions'
 
-import { Box, TextField, Button } from '@mui/material';
+import { Box, TextField, Button, Snackbar, Alert } from '@mui/material';
 import { ExitToApp } from '@mui/icons-material'
 
 
@@ -24,6 +24,7 @@ const Home = (props) => {
     });
     const [data, setData] = useState(8)
     const [show,setShow] = useState(true)
+    const [snackBar,setSnackBar] = useState(false)
  
     useEffect(() => {
         const token = { jwt: jwt }
@@ -44,7 +45,17 @@ const Home = (props) => {
         } else {
             setShow(false)
         }
-    }, [userContent, data])
+    }, [userContent, data]);
+
+    useEffect(() => {
+        if (userContent.success) {
+            setSnackBar(true)
+            setTimeout(() => {
+                setSnackBar(false);
+            }, 2000);
+            userContent.success = false 
+        }
+    }, [userContent.success, userContent]);
 
     const handleLogout = () => {
         logoutUser()
@@ -87,6 +98,10 @@ const Home = (props) => {
             description: '',
             image: ''
         })
+    };
+
+    const handleClose = () => {
+        setSnackBar(false)
     };
 
     return(
@@ -136,7 +151,11 @@ const Home = (props) => {
                     <Button onClick={handleShowMoreData} variant="contained" sx={{marginBottom: '5px'}} disabled={show}>Show Next Row</Button>
                 </Box>
            </Box>
-          
+           <Snackbar open={snackBar} autoHideDuration={2000} onClose={handleClose} anchorOrigin={{vertical: 'top', horizontal: 'center'}}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Content Added!
+                </Alert>
+            </Snackbar>
        </Box>
     );
 };

@@ -144,7 +144,9 @@ const Home = (props) => {
                 </Box>
            </Box>
            <Box sx={{paddingTop: '3em', display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '10px', maxWidth: '100%', paddingLeft: '20px' }}>
-                <UserContent content={searchResults} handleDelete={handleDelete} />
+                {searchResults?.map((post) => {
+                    return <UserContent key={post.id} title={post.title} desc={post.description} img={post.image} id={post.id} handleDelete={handleDelete} />
+                })}      
            </Box>
            <Box sx={{position: 'relative'}}>
                 <Box sx={{position: 'absolute', right: '7%'}}>

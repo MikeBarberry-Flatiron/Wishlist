@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 import { useHistory, Link } from 'react-router-dom';
 import { Box, TextField, Button, Typography} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -37,22 +38,9 @@ const Register = () => {
             username: credentials.username, 
             password: credentials.password
         }
-        fetch('/register', {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify(register)
-          })
-        .then(res => res.json())
-        .then(json => {            
-            if (!json.status === 500) {
-                history.push("/login")           
-            } else {
-               setErrors(json.errors[0])
-            }
-        })
-        .catch(err => console.log(err));
+        axios.post("/register", register)
+            .then(() => history.push("/login"))
+            .catch(({ response }) => setErrors(response.data.errors[0]))
     };
 
     return (
@@ -63,7 +51,7 @@ const Register = () => {
                         error={!!errors}
                         required
                         label="Username"
-                        defaultValue="Enter your username"
+                        placeholder="Enter your username"
                         value={credentials.username}
                         onChange={handleInput}
                         name="username"
@@ -73,7 +61,7 @@ const Register = () => {
                         required
                         type="password"
                         label="Password"
-                        defaultValue="Enter your password"
+                        placeholder="Enter your password"
                         value={credentials.password}
                         onChange={handleInput}
                         name="password"
@@ -83,7 +71,7 @@ const Register = () => {
                         required
                         type="password"
                         label="Repeat Password"
-                        defaultValue="Enter your password again"
+                        placeholder="Enter your password again"
                         value={credentials.password2}
                         onChange={handleInput}
                         name="password2"

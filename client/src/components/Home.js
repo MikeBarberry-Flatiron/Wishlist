@@ -114,7 +114,6 @@ const Home = (props) => {
                 </Box>
                 <Box sx={{paddingTop: '20px', display: 'flex', flexDirection: 'column', gap: '5px',  gridColumn: 'span 2 / span 2', gridColumnStart: 2}}>
                         <TextField
-                            required
                             label="Title"
                             defaultValue="Enter product title"
                             value={newContent.title}
@@ -122,7 +121,6 @@ const Home = (props) => {
                             name="title"
                         />
                         <TextField
-                            required
                             label="Description"
                             defaultValue="Enter product description"
                             value={newContent.description}
@@ -130,7 +128,6 @@ const Home = (props) => {
                             name="description"
                         />
                         <TextField
-                            required
                             label="Image"
                             defaultValue="Enter link to product image"
                             value={newContent.image}

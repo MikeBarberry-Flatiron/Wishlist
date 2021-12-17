@@ -1,2 +1,2 @@
 # Wishlist  
-Users can create accounts secured with JWTs and hashed passwords to keep a centralized list of all the products they wish to purchase  
+Built with React Hooks, Redux, and Material UI on the frontend; and Rails as an API + PostgreSQL on the server-side. 

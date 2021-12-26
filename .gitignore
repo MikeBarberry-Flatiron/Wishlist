@@ -1,6 +1,7 @@
 client/node_modules
 client/package-lock.json
 client/yarn.lock
+client/build
 
 server/Gemfile.lock
 server/tmp/**/*

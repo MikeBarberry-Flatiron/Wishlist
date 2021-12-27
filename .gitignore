@@ -9,4 +9,6 @@ server/log/**/*
 server/log/development.log
 server/config/local_env.yml
 
+html/
+
 .DS_Store

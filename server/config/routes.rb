@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  post '/register' => 'users#register'
-  post '/login' => 'users#login'
-  post '/index' => 'homepage#index'
-  post '/delete' => 'homepage#delete'
-  post '/add' => 'homepage#add'
-  post '/like' => 'homepage#like'
+  post '/api/register' => 'users#register'
+  post '/api/login' => 'users#login'
+  post '/api/index' => 'homepage#index'
+  post '/api/delete' => 'homepage#delete'
+  post '/api/add' => 'homepage#add'
+  post '/api/like' => 'homepage#like'
 end

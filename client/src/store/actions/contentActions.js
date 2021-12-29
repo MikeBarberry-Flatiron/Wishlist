@@ -2,7 +2,7 @@ import { SET_USER_CONTENT, DELETE_CONTENT, UPDATE_LIKES, ADD_CONTENT, CONTENT_SU
 import store from '../../store'
 
 export const getUserContent = jwt => (dispatch) => {
-    fetch('/index', {
+    fetch('/api/index', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -19,7 +19,7 @@ export const getUserContent = jwt => (dispatch) => {
 };
 
 export const deleteContent = request => (dispatch) => {
-    fetch('/delete', {
+    fetch('/api/delete', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -41,7 +41,7 @@ export const deleteContent = request => (dispatch) => {
 }
 
 export const addContent = request => (dispatch) => {
-    fetch('/add', {
+    fetch('/api/add', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -62,7 +62,7 @@ export const addContent = request => (dispatch) => {
 }
 
 export const likeContent = request => (dispatch) => {
-    fetch('/like', {
+    fetch('/api/like', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'

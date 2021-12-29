@@ -3,7 +3,7 @@ import { SET_CURRENT_USER } from './types';
 import { SET_USER_ERRORS } from './types'
 
 export const loginUser = user => (dispatch) => {
-    fetch('/login', {
+    fetch('/api/login', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'

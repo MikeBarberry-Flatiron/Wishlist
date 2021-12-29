@@ -38,7 +38,7 @@ const Register = () => {
             username: credentials.username, 
             password: credentials.password
         }
-        axios.post("/register", register)
+        axios.post("/api/register", register)
             .then(() => history.push("/login"))
             .catch(({ response }) => setErrors(response.data.errors[0]))
     };

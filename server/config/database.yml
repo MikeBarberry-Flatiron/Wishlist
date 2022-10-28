@@ -23,8 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: react-rails
-
+  database: wishlist
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
@@ -79,8 +78,8 @@ development:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-#production:
-#  <<: *default
-#  database: server_production
-#  username: server
-#  password: <%= ENV['SERVER_DATABASE_PASSWORD'] %>
+production:
+  <<: *default
+  database: wishlist
+  username: ubuntu
+  password: <%= ENV['DB_PASS'] %>

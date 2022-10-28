@@ -1,22 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Box, Card, CardActions, CardContent, CardMedia, Button, Typography, 
+        Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions 
+} from '@mui/material'
+import { Delete } from '@mui/icons-material'
 
-const UserContent =  ({ handleDelete, content }) => {
+
+const UserContent =  ({ handleDelete, title, desc, img, id}) => {
+    
+    const [open,setOpen] = useState(false)
+    
+    const handleOpen = () => {
+        setOpen(true)
+    };
+
+    const handleClose = () => {
+        setOpen(false)
+    };
+
+    const deleteItem = (id) => {
+        handleDelete(id)
+        setOpen(false)
+    };
+ 
     return(
-        <div>
-            <h3 id="yourContent">Your Wishlist</h3>
-            <div className="contentContainer">
-                {content.map(content => {
-                    const cb = () => { handleDelete(content.id) }
-                    return <div key={content.id} className="userContent">
-                        <button onClick={cb} className="deleteButton">remove</button>
-                        <h2>{content.category}</h2>
-                        <a href={content.url} target="_blank" rel="noreferrer"><img className="contentImage" src={content.image} alt="user_content_image"></img></a>
-                        <svg width="24px" height="24px" viewBox="0 0 24 24"><svg id="external_link" className="icon_svg-stroke" stroke="#666" strokeWidth="1.5" fill="none" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round"><polyline points="17 13.5 17 19.5 5 19.5 5 7.5 11 7.5"></polyline><path d="M14,4.5 L20,4.5 L20,10.5 M20,4.5 L11,13.5"></path></svg></svg>
-                        <p>{content.description}</p>
-                    </div>
-                })}
-            </div>
-        </div>
+            <Box sx={{display: 'flex', flex: 'auto', width: 300, height: 350, flexDirection: 'column', justifyContent: 'center', padding: '20px'}}>
+                <Card>
+                    <CardMedia
+                        component="img"
+                        height="140"
+                        width="260"
+                        src={img}
+                        alt="content_image"
+                    />
+                    <CardContent sx={{justifySelf: 'center'}}> 
+                        <Typography gutterBottom variant="h5" component="div">
+                            {title}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {desc}
+                        </Typography>
+                    </CardContent>
+                    <CardActions sx={{justifyContent: 'center'}}>
+                            <Button onClick={handleOpen}size="small"><Delete /></Button>
+                            <Dialog
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                            >
+                                <DialogTitle id="alert-dialog-title">
+                                    {"Delete Content?"}
+                                </DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-description">
+                                        This action can't be undone.
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleClose}>Go Back</Button>
+                                    <Button onClick={() => deleteItem(id)} autoFocus>
+                                        OK
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                    </CardActions>
+                </Card>
+            </Box>
+    
     )
 }
 

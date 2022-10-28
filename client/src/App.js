@@ -2,13 +2,11 @@ import jwt_decode from 'jwt-decode'
 
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from '../redux/store.js'
-import { SET_CURRENT_USER } from '../redux/actions/types';
-import { getUserContent } from '../redux/actions/contentActions';
+import store from './store'
+import { SET_CURRENT_USER } from './store/actions/types';
+import { getUserContent } from './store/actions/contentActions';
 
-import ProtectedRoute from './ProtectedRoute'
-import AuthPage from './auth/AuthPage'
-import HomePage from './content/HomePage.js'
+import { Home, Login, ProtectedRoute, Register} from './components' 
 
 if (localStorage.jwt) {
     const jwt = localStorage.jwt 
@@ -28,10 +26,10 @@ function App() {
     return (
       <Provider store={store}>
         <Router>
-          <Route exact path ="/" component={AuthPage} />
-          <Route exact path ="/login" component={AuthPage} />
-          <Route exact path ="/register" component={AuthPage} />
-          <ProtectedRoute exact path ="/homepage" component={HomePage} />
+          <Route exact path ="/" component={Login} />
+          <Route exact path ="/login" component={Login} />
+          <Route exact path ="/register" component={Register} />
+          <ProtectedRoute exact path ="/home" component={Home} />
         </Router>
       </Provider>
     );

@@ -1,7 +1,7 @@
 import { SET_USER_ERRORS } from '../actions/types'
 
 let initialState = {
-    error: ''
+    error: null
 }
 
 const errorReducer = (state = initialState, action) => {

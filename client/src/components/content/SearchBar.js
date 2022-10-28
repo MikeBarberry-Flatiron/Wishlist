@@ -1,10 +1,9 @@
 import React from 'react';
+import { TextField } from '@mui/material'
 
  const SearchBar = ({ searchBar}) => {
     return (
-        <label id="searchBar" htmlFor="search">search:
-            <input id="searchBarInput" type="search" name="search" onChange={searchBar} />
-        </label>
+        <TextField id="standard-basic" label="Search" variant="standard" onChange={searchBar} />
     )
 }
 

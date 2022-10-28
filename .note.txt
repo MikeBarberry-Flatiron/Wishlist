@@ -1,0 +1,3 @@
+move static folder in html (generate react build) into root of public folder on server
+
+put favicon in root of public

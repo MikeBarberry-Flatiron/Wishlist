@@ -86,7 +86,7 @@ const Login = (props) => {
         <TextField
           required
           label="Username"
-          defaultValue="Enter your username"
+          placeholder="Enter your username"
           value={credentials.username}
           onChange={handleInput}
           name="username"
@@ -96,7 +96,7 @@ const Login = (props) => {
           required
           type="password"
           label="Password"
-          defaultValue="Enter your password"
+          placeholder="Enter your password"
           value={credentials.password}
           onChange={handleInput}
           name="password"

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory, Link } from "react-router-dom";
-import { Box, TextField, Button, Typography } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme({
@@ -22,6 +23,7 @@ const Register = () => {
   // errors one is a server error - username taken
   const [errors, setErrors] = useState(null);
   const [passErrors, setPassErrors] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInput = (e) => {
     setCredentials({
@@ -38,10 +40,25 @@ const Register = () => {
       username: credentials.username,
       password: credentials.password,
     };
-    axios
+    setIsLoading(true);
+    const instance = axios.create({
+      baseURL: "https://ztsavz2pxk.execute-api.us-west-2.amazonaws.com/prod",
+      headers: {
+        credentials: false,
+      },
+    });
+    instance
       .post("/api/register", register)
-      .then(() => history.push("/login"))
-      .catch(({ response }) => setErrors(response.data.errors[0]));
+      .then((response) => {
+        setIsLoading(false);
+        console.log("response", response);
+        //history.push("/login")
+      })
+      //.catch(({ response }) => setErrors(response.data.errors[0]));
+      .catch((error) => {
+        setIsLoading(false);
+        console.log("error", error);
+      });
   };
 
   return (
@@ -56,6 +73,7 @@ const Register = () => {
     >
       <Box
         sx={{
+          zIndex: "auto",
           height: "50vw",
           width: "90vw",
           backgroundColor: "white",
@@ -68,6 +86,7 @@ const Register = () => {
       >
         <Box
           sx={{
+            zIndex: 1,
             height: "80%",
             width: "40%",
             backgroundColor: "white",
@@ -93,6 +112,9 @@ const Register = () => {
             onChange={handleInput}
             name="username"
             helperText={errors}
+            sx={{
+              zIndex: 2,
+            }}
           />
           <TextField
             required
@@ -102,6 +124,9 @@ const Register = () => {
             value={credentials.password}
             onChange={handleInput}
             name="password"
+            sx={{
+              zIndex: 2,
+            }}
           />
           <TextField
             error={!!passErrors}
@@ -113,10 +138,17 @@ const Register = () => {
             onChange={handleInput}
             name="password2"
             helperText={passErrors}
+            sx={{
+              zIndex: 2,
+            }}
           />
-          <Button onClick={handleSubmit} variant="contained">
+          <LoadingButton
+            onClick={handleSubmit}
+            variant="contained"
+            loading={isLoading}
+          >
             Submit
-          </Button>
+          </LoadingButton>
           <ThemeProvider theme={theme}>
             <Typography
               variant="subtitle1"
@@ -125,6 +157,7 @@ const Register = () => {
                 paddingLeft: "2vw",
                 fontFamily: "Raleway",
                 fontWeight: 300,
+                zIndex: 2,
               }}
             >
               Already Have an Account? <Link to="/login">Login</Link>

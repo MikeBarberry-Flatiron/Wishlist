@@ -24,7 +24,6 @@ exports.handler = async (event) => {
           statusCode: 200,
           body: JSON.stringify({
             message: 'Logged in.',
-            error: null,
             jwt: token
           }),
           headers: {
@@ -32,22 +31,22 @@ exports.handler = async (event) => {
           },
         }
       },
-      400 (message) {
+      400 (type, error) {
         return {
           statusCode: 400,
           body: JSON.stringify({
-          message: null,
-          error: message,
-        }),
-        headers: {
-          'access-control-allow-origin': '*',
-        },
+            errorType: type,
+            error,
+          }),
+          headers: {
+            'access-control-allow-origin': '*',
+          },
         }
       },
       500: {
         statusCode: 500,
         body: JSON.stringify({
-          message: null,
+          errorType: 'Server',
           error: 'A server error occurred during login.',
         }),
         headers: {
@@ -64,13 +63,13 @@ exports.handler = async (event) => {
 
       const user = await collection.findOne({ username })
       if (!user) {
-        return returnValues[400]('User does not exist.')
+        return returnValues[400]('User', 'User does not exist.')
       }
       const isPasswordCorrect = await bcrypt.compare(password, user.hash)
       if (!isPasswordCorrect) {
-        return returnValues[400]('Password is incorrect.')
+        return returnValues[400]('Password', 'Password is incorrect.')
       }
-      const token = jwt.sign({ user }, 'w!$HL!$T3')
+      const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET)
       return returnValues[200](token)
     } catch (err) {
       console.log(`Error: ${err}`)
@@ -78,4 +77,3 @@ exports.handler = async (event) => {
     }
   }
 };
-

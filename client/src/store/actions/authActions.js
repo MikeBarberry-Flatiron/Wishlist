@@ -3,16 +3,21 @@ import { SET_CURRENT_USER } from "./types";
 import { SET_USER_ERRORS } from "./types";
 
 export const loginUser = (user) => (dispatch) => {
-  fetch("/api/login", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(user),
-  })
+  fetch(
+    "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/login",
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    }
+  )
     .then((res) => res.json())
     .then((json) => {
-      if (json.status === 200) {
+      console.log(json);
+    });
+  /* if (json.status === 200) {
         localStorage.setItem("jwt", json.jwt);
         const { jwt } = json;
         const { user_name } = jwt_decode(jwt);
@@ -26,7 +31,7 @@ export const loginUser = (user) => (dispatch) => {
           payload: json.message,
         });
       }
-    });
+    }); */
 };
 
 export const logoutUser = () => (dispatch) => {

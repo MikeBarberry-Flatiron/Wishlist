@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useHistory, Link } from "react-router-dom";
 import { Box, TextField, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
@@ -32,33 +31,32 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (credentials.password !== credentials.password2)
       return setPassErrors("Passwords don't match");
+    setPassErrors(false);
     const register = {
       username: credentials.username,
       password: credentials.password,
     };
     setIsLoading(true);
-    const instance = axios.create({
-      baseURL: "https://ztsavz2pxk.execute-api.us-west-2.amazonaws.com/prod",
-      headers: {
-        credentials: false,
-      },
-    });
-    instance
-      .post("/api/register", register)
-      .then((response) => {
-        setIsLoading(false);
-        console.log("response", response);
-        //history.push("/login")
-      })
-      //.catch(({ response }) => setErrors(response.data.errors[0]));
-      .catch((error) => {
-        setIsLoading(false);
-        console.log("error", error);
-      });
+    const response = await fetch(
+      "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/register",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(register),
+      }
+    );
+    const json = await response.json();
+    if (response.status === 200) {
+      history.push("/login");
+    }
+    setErrors(json.error);
+    setIsLoading(false);
   };
 
   return (

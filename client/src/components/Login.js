@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
-import { loginUser } from "../store/actions/authActions";
 
-import { Box, TextField, Button, Paper, Typography } from "@mui/material";
+import { Box, TextField, Paper, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import Blob from "../assets/blob.png";
 import Blob2 from "../assets/blob2.png";
+
+import { loginUser } from "../store/actions/authActions";
 
 const theme = createTheme({
   typography: {
@@ -20,8 +22,9 @@ const Login = (props) => {
     username: "",
     password: "",
   });
-
-  if (props.currentUser) return <Redirect to="/home" />;
+  const [isLoading, setIsLoading] = useState(false);
+  const [passwordError, setPasswordError] = useState(null);
+  const [userError, setUserError] = useState(null);
 
   const handleInput = (e) => {
     setCredentials({
@@ -30,14 +33,48 @@ const Login = (props) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = {
-      username: credentials.username,
-      password: credentials.password,
-    };
-    props.loginUser(user);
+    setPasswordError(null);
+    setUserError(null);
+    setIsLoading(true);
+    const { username, password } = credentials;
+    try {
+      const [status, json] = await makeRequest(username, password);
+      setIsLoading(false);
+      if (status !== 200) {
+        if (json.errorType === "User") {
+          setUserError(json.error);
+        } else {
+          setPasswordError(json.error);
+        }
+      }
+      props.loginUser(json.jwt);
+    } catch (err) {
+      console.log(`An error occurred: ${err}`);
+    }
   };
+
+  const makeRequest = async (username, password) => {
+    try {
+      const response = await fetch(
+        "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/login",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        }
+      );
+      const json = await response.json();
+      return [response.status, json];
+    } catch (err) {
+      return new Error("Fetch error");
+    }
+  };
+
+  if (props.isLoggedIn) return <Redirect to="/home" />;
 
   return (
     <Box
@@ -86,25 +123,31 @@ const Login = (props) => {
         <TextField
           required
           label="Username"
+          name="username"
           placeholder="Enter your username"
           value={credentials.username}
           onChange={handleInput}
-          name="username"
+          error={!!userError}
+          helperText={userError}
         />
         <TextField
-          error={!!props.userErrors}
           required
-          type="password"
           label="Password"
+          type="password"
+          name="password"
           placeholder="Enter your password"
           value={credentials.password}
           onChange={handleInput}
-          name="password"
-          helperText={props.userErrors}
+          error={!!passwordError}
+          helperText={passwordError}
         />
-        <Button onClick={handleSubmit} variant="contained">
+        <LoadingButton
+          onClick={(e) => handleSubmit(e)}
+          variant="contained"
+          loading={isLoading}
+        >
           Submit
-        </Button>
+        </LoadingButton>
         <ThemeProvider theme={theme}>
           <Typography
             variant="subtitle1"
@@ -121,15 +164,14 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser.isAuthenticated,
-    userErrors: state.userErrors.error,
+    isLoggedIn: state.currentUser.isAuthenticated,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginUser: (user) => {
-      dispatch(loginUser(user));
+    loginUser: (token) => {
+      dispatch(loginUser(token));
     },
   };
 };

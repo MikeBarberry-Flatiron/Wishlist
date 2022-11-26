@@ -1,7 +1,7 @@
-import jwt_decode from "jwt-decode";
-
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+import jwt_decode from "jwt-decode";
+
 import store from "./store";
 import { SET_CURRENT_USER } from "./store/actions/types";
 import { getUserContent } from "./store/actions/contentActions";
@@ -10,10 +10,10 @@ import { Home, Login, ProtectedRoute, Register } from "./components";
 
 if (localStorage.jwt) {
   const jwt = localStorage.jwt;
-  const { user_name } = jwt_decode(jwt);
+  const { username } = jwt_decode(jwt);
   store.dispatch({
     type: SET_CURRENT_USER,
-    payload: user_name,
+    payload: username,
   });
 }
 

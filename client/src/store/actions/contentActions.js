@@ -1,7 +1,6 @@
 import {
   SET_USER_CONTENT,
   DELETE_CONTENT,
-  UPDATE_LIKES,
   ADD_CONTENT,
   CONTENT_SUCCESS,
 } from "./types";
@@ -20,31 +19,6 @@ export const getUserContent = (jwt) => (dispatch) => {
       dispatch({
         type: SET_USER_CONTENT,
         payload: json,
-      });
-    });
-};
-
-export const deleteContent = (request) => (dispatch) => {
-  fetch("/api/delete", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(request),
-  })
-    .then((res) => res.json())
-    .then((json) => {
-      const { deletedContent, newContent } = json.updated;
-      const index = store
-        .getState()
-        .userContent.userContent.map((e) => e.id)
-        .indexOf(deletedContent);
-      dispatch({
-        type: DELETE_CONTENT,
-        payload: {
-          deleteIndex: index,
-          newContent: newContent,
-        },
       });
     });
 };
@@ -70,8 +44,8 @@ export const addContent = (request) => (dispatch) => {
     });
 };
 
-export const likeContent = (request) => (dispatch) => {
-  fetch("/api/like", {
+export const deleteContent = (request) => (dispatch) => {
+  fetch("/api/delete", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -80,9 +54,17 @@ export const likeContent = (request) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((json) => {
+      const { deletedContent, newContent } = json.updated;
+      const index = store
+        .getState()
+        .userContent.userContent.map((e) => e.id)
+        .indexOf(deletedContent);
       dispatch({
-        type: UPDATE_LIKES,
-        payload: json.updated_likes,
+        type: DELETE_CONTENT,
+        payload: {
+          deleteIndex: index,
+          newContent: newContent,
+        },
       });
     });
 };

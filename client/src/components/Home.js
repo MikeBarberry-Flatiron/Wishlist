@@ -30,11 +30,11 @@ const Home = (props) => {
   const [show, setShow] = useState(true);
   const [snackBar, setSnackBar] = useState(false);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const token = { jwt: jwt };
     getUserContent(token);
   }, [getUserContent, jwt]);
-
+ */
   useEffect(() => {
     const searchContent = userContent.userContent.filter((item) => {
       return item.title.toLowerCase().includes(search.toLowerCase());
@@ -156,21 +156,21 @@ const Home = (props) => {
         >
           <TextField
             label="Title"
-            defaultValue="Enter product title"
+            placeholder="Enter product title"
             value={newContent.title}
             onChange={handleInput}
             name="title"
           />
           <TextField
             label="Description"
-            defaultValue="Enter product description"
+            placeholder="Enter product description"
             value={newContent.description}
             onChange={handleInput}
             name="description"
           />
           <TextField
             label="Image"
-            defaultValue="Enter link to product image"
+            placeholder="Enter link to product image"
             value={newContent.image}
             onChange={handleInput}
             name="image"

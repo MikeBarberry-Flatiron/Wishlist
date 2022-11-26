@@ -19,7 +19,6 @@ const Register = () => {
     password2: "",
   });
 
-  // errors one is a server error - username taken
   const [errors, setErrors] = useState(null);
   const [passErrors, setPassErrors] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

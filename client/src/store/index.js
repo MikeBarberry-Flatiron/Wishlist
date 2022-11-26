@@ -12,9 +12,3 @@ export default createStore(
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
-
-document.addEventListener("DOMContentLoaded", function () {
-  const iframe = document.getElementsByTagName("iframe");
-  iframe.remove();
-  window.console.clear();
-});

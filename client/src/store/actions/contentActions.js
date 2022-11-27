@@ -6,21 +6,24 @@ import {
 } from "./types";
 import store from "../../store";
 
-export const getUserContent = (jwt) => (dispatch) => {
-  fetch("/api/index", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(jwt),
-  })
-    .then((res) => res.json())
-    .then((json) => {
-      dispatch({
-        type: SET_USER_CONTENT,
-        payload: json,
-      });
-    });
+export const getUserContent = (token) => async (dispatch) => {
+  console.log("started fetch content", token);
+  const response = await fetch(
+    "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/getcontent",
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ jwt: token }),
+    }
+  );
+  const json = await response.json();
+  console.log(json.content);
+  dispatch({
+    type: SET_USER_CONTENT,
+    payload: json.content,
+  });
 };
 
 export const addContent = (request) => (dispatch) => {

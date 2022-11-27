@@ -15,7 +15,7 @@ const contentReducer = (state = initialState, action) => {
     case SET_USER_CONTENT:
       return {
         ...state,
-        userContent: action.payload.user_content,
+        userContent: action.payload,
       };
     case ADD_CONTENT:
       return {

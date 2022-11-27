@@ -14,8 +14,7 @@ import { ExitToApp } from "@mui/icons-material";
 import { SearchBar, UserContent } from "./content";
 
 const Home = (props) => {
-  const jwt = localStorage.getItem("jwt");
-
+  const token = localStorage.getItem("jwt");
   const { getUserContent, userContent, addContent, logoutUser, deleteContent } =
     props;
 
@@ -30,11 +29,10 @@ const Home = (props) => {
   const [show, setShow] = useState(true);
   const [snackBar, setSnackBar] = useState(false);
 
-  /*  useEffect(() => {
-    const token = { jwt: jwt };
+  useEffect(() => {
     getUserContent(token);
-  }, [getUserContent, jwt]);
- */
+  }, [getUserContent, token]);
+
   useEffect(() => {
     const searchContent = userContent.userContent.filter((item) => {
       return item.title.toLowerCase().includes(search.toLowerCase());
@@ -72,7 +70,7 @@ const Home = (props) => {
   const handleDelete = (id) => {
     const request = {
       content_id: id,
-      jwt: jwt,
+      jwt: token,
     };
     deleteContent(request);
   };
@@ -91,7 +89,7 @@ const Home = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const content = {
-      jwt: jwt,
+      jwt: token,
       title: newContent.title,
       description: newContent.description,
       image: newContent.image,
@@ -204,7 +202,7 @@ const Home = (props) => {
         {searchResults?.map((post) => {
           return (
             <UserContent
-              key={post.id}
+              key={post.title}
               title={post.title}
               desc={post.description}
               img={post.image}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { Box, TextField, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
@@ -13,50 +13,47 @@ const theme = createTheme({
 const Register = () => {
   const history = useHistory();
 
-  const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-    password2: "",
-  });
+  const [username, setUsername] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
 
   const [errors, setErrors] = useState(null);
   const [passErrors, setPassErrors] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleInput = (e) => {
+  /* const handleInput = (e) => {
     setCredentials({
       ...credentials,
       [e.target.name]: e.target.value,
     });
-  };
+  }; */
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (credentials.password !== credentials.password2)
-      return setPassErrors("Passwords don't match");
-    setPassErrors(false);
-    const register = {
-      username: credentials.username,
-      password: credentials.password,
-    };
-    setIsLoading(true);
-    const response = await fetch(
-      "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/register",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(register),
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      if (password1 !== password2)
+        return setPassErrors("Passwords don't match");
+      setPassErrors(false);
+      setIsLoading(true);
+      const response = await fetch(
+        "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/register",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ username, password: password1 }),
+        }
+      );
+      const json = await response.json();
+      setIsLoading(false);
+      setErrors(json.error);
+      if (response.status === 200) {
+        history.push("/login");
       }
-    );
-    const json = await response.json();
-    if (response.status === 200) {
-      history.push("/login");
-    }
-    setErrors(json.error);
-    setIsLoading(false);
-  };
+    },
+    [history, username, password1, password2]
+  );
 
   return (
     <Box
@@ -105,8 +102,8 @@ const Register = () => {
             required
             label="Username"
             placeholder="Enter your username"
-            value={credentials.username}
-            onChange={handleInput}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             name="username"
             helperText={errors}
             sx={{
@@ -118,8 +115,8 @@ const Register = () => {
             type="password"
             label="Password"
             placeholder="Enter your password"
-            value={credentials.password}
-            onChange={handleInput}
+            value={password1}
+            onChange={(e) => setPassword1(e.target.value)}
             name="password"
             sx={{
               zIndex: 2,
@@ -131,8 +128,8 @@ const Register = () => {
             type="password"
             label="Repeat Password"
             placeholder="Enter your password again"
-            value={credentials.password2}
-            onChange={handleInput}
+            value={password2}
+            onChange={(e) => setPassword2(e.target.value)}
             name="password2"
             helperText={passErrors}
             sx={{

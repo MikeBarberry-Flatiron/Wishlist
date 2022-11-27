@@ -1,4 +1,4 @@
-export { default as Home } from "./Home";
-export { default as Login } from "./Login";
-export { default as Register } from "./Register";
-export { default as ProtectedRoute } from "./ProtectedRoute";
+export { default as UserContent } from "./content/UserContent";
+export { default as Login } from "./auth//Login";
+export { default as Register } from "./auth/Register";
+export { default as ProtectedRoute } from "./auth/ProtectedRoute";

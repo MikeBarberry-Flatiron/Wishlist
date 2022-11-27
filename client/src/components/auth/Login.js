@@ -6,10 +6,10 @@ import { Box, TextField, Paper, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import Blob from "../assets/blob.png";
-import Blob2 from "../assets/blob2.png";
+import Blob from "../../assets/blob.png";
+import Blob2 from "../../assets/blob2.png";
 
-import { loginUser } from "../store/actions/authActions";
+import { loginUser } from "../../store/actions/authActions";
 
 const theme = createTheme({
   typography: {

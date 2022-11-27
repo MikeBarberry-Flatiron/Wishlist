@@ -24,17 +24,18 @@ export const getUserContent = (token) => async (dispatch) => {
   });
 };
 
-export const addContent = (request) => async (dispatch) => {
+export const addContent = (newContent) => async (dispatch) => {
   const response = await fetch(
-    "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/addcontent", 
-  {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify(request),
-  });
-  const json = await response.json()
+    "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/addcontent",
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newContent),
+    }
+  );
+  const json = await response.json();
   dispatch({
     type: ADD_CONTENT,
     payload: json.updated,
@@ -47,14 +48,15 @@ export const addContent = (request) => async (dispatch) => {
 
 export const deleteContent = (request) => async (dispatch) => {
   const response = await fetch(
-    "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/deletecontent", 
+    "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/deletecontent",
     {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify(request),
-    });
+    }
+  );
   const json = await response.json();
   const { deletedContent, newContent } = json.updated;
   const index = store

@@ -18,7 +18,6 @@ if (localStorage.jwt) {
 }
 
 if (store.getState().currentUser.isAuthenticated) {
-  console.log("this was triggered");
   const jwt = localStorage.jwt;
   getUserContent(jwt);
 }

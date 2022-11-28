@@ -13,5 +13,4 @@ const intervalID = setInterval(function () {
     iframe[0].remove();
     clearInterval(intervalID);
   }
-  console.log("interval just ran");
 }, 500);

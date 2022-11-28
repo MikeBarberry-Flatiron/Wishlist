@@ -18,14 +18,14 @@ exports.handler = async (event) => {
 
   if (event.httpMethod === "POST") {
     const responseValues = {
-      200(usercontent) {
+      200(content) {
         return {
           statusCode: 200,
           headers: {
             "access-control-allow-origin": "*",
           },
           body: JSON.stringify({
-            usercontent,
+            content,
           }),
         };
       },
@@ -49,18 +49,10 @@ exports.handler = async (event) => {
     const collection = database.collection("usercontent");
 
     try {
-      const decodedUsername = jwt.verify(token, process.env.JWT_SECRET);
-      const user = await collection.findOne(decodedUsername);
-      // return responseValues[200](user.usercontent);
-      return {
-        statusCode: 200,
-        headers: {
-          "access-control-allow-origin": "*",
-        },
-        body: JSON.stringify({
-          user,
-        }),
-      };
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const username = decoded.username;
+      const user = await collection.findOne({ username });
+      return responseValues[200](user.content);
     } catch (err) {
       console.log(`A server error occurred: ${err}`);
       return responseValues[500](err);

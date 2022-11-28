@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
-const ContentCard = ({ handleDelete, title, desc, img, id }) => {
+const ContentCard = ({ handleDelete, title, desc, img }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -26,8 +26,8 @@ const ContentCard = ({ handleDelete, title, desc, img, id }) => {
     setOpen(false);
   };
 
-  const deleteItem = (id) => {
-    handleDelete(id);
+  const deleteItem = (title) => {
+    handleDelete(title);
     setOpen(false);
   };
 
@@ -79,7 +79,7 @@ const ContentCard = ({ handleDelete, title, desc, img, id }) => {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}>Go Back</Button>
-              <Button onClick={() => deleteItem(id)} autoFocus>
+              <Button onClick={() => deleteItem(title)} autoFocus>
                 OK
               </Button>
             </DialogActions>

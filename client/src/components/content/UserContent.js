@@ -53,12 +53,8 @@ const UserContent = ({
     setData(data + 4);
   };
 
-  const handleDelete = (id) => {
-    const request = {
-      content_id: id,
-      jwt: token,
-    };
-    deleteContent(request);
+  const handleDelete = (title) => {
+    deleteContent({ jwt: token, title });
   };
 
   const handleSearch = (e) => {

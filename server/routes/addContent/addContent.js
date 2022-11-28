@@ -18,14 +18,17 @@ exports.handler = async (event) => {
 
   if (event.httpMethod === "POST") {
     const responseValues = {
-      200: {
-        statusCode: 200,
-        headers: {
-          "access-control-allow-origin": "*",
-        },
-        body: JSON.stringify({
-          message: "Item successfully added.",
-        }),
+      200(updatedContent) {
+        return {
+          statusCode: 200,
+          headers: {
+            "access-control-allow-origin": "*",
+          },
+          body: JSON.stringify({
+            message: "Item successfully added.",
+            updatedContent,
+          }),
+        };
       },
       500(err) {
         return {
@@ -56,11 +59,11 @@ exports.handler = async (event) => {
       const user = await collection.findOne({ username });
       const content = user.content;
       const updatedContent = [...content, { title, description, image }];
-      const updatedUserContent = await collection.updateOne(
+      await collection.updateOne(
         { _id: new ObjectId(user._id) },
         { $set: { content: updatedContent } }
       );
-      return responseValues[200];
+      return responseValues[200](updatedContent);
     } catch (err) {
       return responseValues[500](err);
     }

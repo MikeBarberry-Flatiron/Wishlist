@@ -24,27 +24,35 @@ export const getUserContent = (token) => async (dispatch) => {
   });
 };
 
-export const addContent = (newContent) => async (dispatch) => {
-  const response = await fetch(
-    "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/addcontent",
-    {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newContent),
+export const addContent =
+  (newContentRequest, handleIsLoading) => async (dispatch) => {
+    try {
+      handleIsLoading(true);
+      const response = await fetch(
+        "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/addcontent",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(newContentRequest),
+        }
+      );
+      const json = await response.json();
+      handleIsLoading(false);
+      console.log(json);
+      dispatch({
+        type: ADD_CONTENT,
+        payload: json.updatedContent,
+      });
+      dispatch({
+        type: CONTENT_SUCCESS,
+        payload: true,
+      });
+    } catch (err) {
+      console.log(`An error occurred POSTing new card content: ${err}`);
     }
-  );
-  const json = await response.json();
-  dispatch({
-    type: ADD_CONTENT,
-    payload: json.updated,
-  });
-  dispatch({
-    type: CONTENT_SUCCESS,
-    payload: true,
-  });
-};
+  };
 
 export const deleteContent = (request) => async (dispatch) => {
   const response = await fetch(

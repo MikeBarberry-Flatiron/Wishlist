@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Box, TextField, Button, Snackbar, Alert } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { ExitToApp } from "@mui/icons-material";
 
 import { logoutUser } from "../../store/actions/authActions";
@@ -17,6 +18,7 @@ const UserContent = (props) => {
   const { getUserContent, userContent, addContent, logoutUser, deleteContent } =
     props;
 
+  const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [newContent, setNewContent] = useState({
@@ -85,15 +87,19 @@ const UserContent = (props) => {
     });
   };
 
+  const handleLoading = (bool) => {
+    setIsLoading(bool);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const content = {
+    const addContentRequest = {
       jwt: token,
       title: newContent.title,
       description: newContent.description,
       image: newContent.image,
     };
-    addContent(content);
+    addContent(addContentRequest, handleLoading);
     setNewContent({
       title: "",
       description: "",
@@ -172,9 +178,13 @@ const UserContent = (props) => {
             onChange={handleInput}
             name="image"
           />
-          <Button variant="contained" onClick={handleSubmit}>
+          <LoadingButton
+            variant="contained"
+            onClick={handleSubmit}
+            loading={isLoading}
+          >
             Submit
-          </Button>
+          </LoadingButton>
         </Box>
         <Box
           sx={{

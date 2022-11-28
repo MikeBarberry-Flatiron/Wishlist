@@ -20,7 +20,7 @@ const contentReducer = (state = initialState, action) => {
     case ADD_CONTENT:
       return {
         ...state,
-        userContent: [...state.userContent, action.payload.updated_content],
+        userContent: action.payload,
         newPosts: action.payload.new_content,
       };
     case CONTENT_SUCCESS:

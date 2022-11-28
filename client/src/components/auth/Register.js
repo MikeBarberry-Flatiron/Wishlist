@@ -21,13 +21,6 @@ const Register = () => {
   const [passErrors, setPassErrors] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  /* const handleInput = (e) => {
-    setCredentials({
-      ...credentials,
-      [e.target.name]: e.target.value,
-    });
-  }; */
-
   const handleSubmit = useCallback(
     async (e) => {
       e.preventDefault();

@@ -84,6 +84,24 @@ exports.handler = async (event) => {
         image: "https://c1.staticflickr.com/5/4037/4347301073_41a681a1a2_b.jpg",
         description: "this coral often grows large and has a unique shape",
       },
+      {
+        title: "SPS",
+        description: "sps coral stands for small polyp stony",
+        image:
+          "https://cdn.shopify.com/s/files/1/2104/4149/products/acr-H6H4-2_1024x1024_2x_502d3e07-c606-484f-b83d-7887e48a98f1_410x.jpg?v=1500776485",
+      },
+      {
+        title: "Frogspawn",
+        description: "called frogspawn due to the green color",
+        image:
+          "https://theaquariumguide.com/wp-content/uploads/2018/07/Frogspawn-Coral.jpg",
+      },
+      {
+        title: "Hammerhead",
+        description: "aptly named",
+        image:
+          "https://cdn.fishtankadvisor.com/wp-content/uploads/2021/11/euphylliidae-ancora.jpg",
+      },
     ];
     const requestBody = JSON.parse(event.body);
     const username = requestBody.username.toLowerCase();

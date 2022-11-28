@@ -1,9 +1,4 @@
-import {
-  SET_USER_CONTENT,
-  DELETE_CONTENT,
-  ADD_CONTENT,
-  CONTENT_SUCCESS,
-} from "./types";
+import { SET_USER_CONTENT, DELETE_CONTENT, ADD_CONTENT } from "./types";
 import store from "../../store";
 
 export const getUserContent = (token) => async (dispatch) => {
@@ -25,7 +20,7 @@ export const getUserContent = (token) => async (dispatch) => {
 };
 
 export const addContent =
-  (newContentRequest, handleIsLoading) => async (dispatch) => {
+  (newContentRequest, handleIsLoading, handleShow) => async (dispatch) => {
     try {
       handleIsLoading(true);
       const response = await fetch(
@@ -45,10 +40,7 @@ export const addContent =
         type: ADD_CONTENT,
         payload: json.updatedContent,
       });
-      dispatch({
-        type: CONTENT_SUCCESS,
-        payload: true,
-      });
+      handleShow(true);
     } catch (err) {
       console.log(`An error occurred POSTing new card content: ${err}`);
     }

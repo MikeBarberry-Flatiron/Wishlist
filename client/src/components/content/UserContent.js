@@ -13,22 +13,25 @@ import {
 
 import { SearchBar, ContentCard } from ".";
 
-const UserContent = (props) => {
+const UserContent = ({
+  getUserContent,
+  userContent,
+  addContent,
+  logoutUser,
+  deleteContent,
+}) => {
   const token = localStorage.getItem("jwt");
-  const { getUserContent, userContent, addContent, logoutUser, deleteContent } =
-    props;
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const [newContent, setNewContent] = useState({
     title: "",
     description: "",
     image: "",
   });
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const [data, setData] = useState(8);
-  const [show, setShow] = useState(true);
-  const [snackBar, setSnackBar] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     getUserContent(token);
@@ -41,24 +44,6 @@ const UserContent = (props) => {
     const dataToShow = searchContent.slice(0, data);
     setSearchResults(dataToShow);
   }, [search, userContent.userContent, data]);
-
-  useEffect(() => {
-    if (userContent.userContent.length <= data) {
-      setShow(true);
-    } else {
-      setShow(false);
-    }
-  }, [userContent, data]);
-
-  useEffect(() => {
-    if (userContent.success) {
-      setSnackBar(true);
-      setTimeout(() => {
-        setSnackBar(false);
-      }, 2000);
-      userContent.success = false;
-    }
-  }, [userContent.success, userContent]);
 
   const handleLogout = () => {
     logoutUser();
@@ -91,6 +76,10 @@ const UserContent = (props) => {
     setIsLoading(bool);
   };
 
+  const handleShow = (bool) => {
+    setShow(bool);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const addContentRequest = {
@@ -99,7 +88,7 @@ const UserContent = (props) => {
       description: newContent.description,
       image: newContent.image,
     };
-    addContent(addContentRequest, handleLoading);
+    addContent(addContentRequest, handleLoading, handleShow);
     setNewContent({
       title: "",
       description: "",
@@ -108,7 +97,7 @@ const UserContent = (props) => {
   };
 
   const handleClose = () => {
-    setSnackBar(false);
+    setShow(false);
   };
 
   return (
@@ -227,19 +216,19 @@ const UserContent = (props) => {
             onClick={handleShowMoreData}
             variant="contained"
             sx={{ marginBottom: "5px" }}
-            disabled={show}
+            disabled={userContent.userContent.length <= data}
           >
             Show Next Row
           </Button>
         </Box>
       </Box>
       <Snackbar
-        open={snackBar}
-        autoHideDuration={2000}
+        open={show}
         onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+        <Alert severity="success" sx={{ width: "100%" }}>
           Content Added!
         </Alert>
       </Snackbar>

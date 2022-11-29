@@ -1,4 +1,4 @@
 # Wishlist  
-Built with React (Hooks), Redux, and Material UI on the front end; and AWS Lambda (NodeJS) + MongoDB on the back end. 
+Built with React v18, Redux, & Material UI on the front end with AWS Lambda (NodeJS 18) + MongoDB on the back end. 
 <br />
 Deployed with <3 on Netlify. 

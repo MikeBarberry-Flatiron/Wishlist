@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 
-const ContentCard = ({ handleDelete, title, desc, img }) => {
+export default function ContentCard({ handleDelete, title, desc, img }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -41,7 +41,8 @@ const ContentCard = ({ handleDelete, title, desc, img }) => {
         flexDirection: 'column',
         justifyContent: 'center',
         padding: '20px',
-      }}>
+      }}
+    >
       <Card>
         <CardMedia
           component='img'
@@ -51,29 +52,23 @@ const ContentCard = ({ handleDelete, title, desc, img }) => {
           alt='content_image'
         />
         <CardContent sx={{ justifySelf: 'center' }}>
-          <Typography
-            gutterBottom
-            variant='h5'
-            component='div'>
+          <Typography gutterBottom variant='h5' component='div'>
             {title}
           </Typography>
-          <Typography
-            variant='body2'
-            color='text.secondary'>
+          <Typography variant='body2' color='text.secondary'>
             {desc}
           </Typography>
         </CardContent>
         <CardActions sx={{ justifyContent: 'center' }}>
-          <Button
-            onClick={handleOpen}
-            size='small'>
+          <Button onClick={handleOpen} size='small'>
             <Delete />
           </Button>
           <Dialog
             open={open}
             onClose={handleClose}
             aria-labelledby='alert-dialog-title'
-            aria-describedby='alert-dialog-description'>
+            aria-describedby='alert-dialog-description'
+          >
             <DialogTitle id='alert-dialog-title'>
               {'Are you sure you want to delete this?'}
             </DialogTitle>
@@ -84,9 +79,7 @@ const ContentCard = ({ handleDelete, title, desc, img }) => {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}>Cancel</Button>
-              <Button
-                onClick={() => deleteItem(title)}
-                autoFocus>
+              <Button onClick={() => deleteItem(title)} autoFocus>
                 Yes
               </Button>
             </DialogActions>
@@ -95,6 +88,4 @@ const ContentCard = ({ handleDelete, title, desc, img }) => {
       </Card>
     </Box>
   );
-};
-
-export default ContentCard;
+}

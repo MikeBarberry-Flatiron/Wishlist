@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { connect } from 'react-redux';
 import { Box, TextField, Button, Snackbar, Alert } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -11,7 +11,8 @@ import {
   addContent,
 } from '../../store/actions/contentActions';
 
-import { SearchBar, ContentCard } from '.';
+import SearchBar from './SearchBar';
+import ContentCard from './ContentCard';
 
 const UserContent = ({
   getUserContent,
@@ -30,17 +31,24 @@ const UserContent = ({
   const [isLoading, setIsLoading] = useState(false);
   const [showSnackbar, setShowSnackbar] = useState(false);
 
+  console.log(userContent);
+
   const token = localStorage.getItem('jwt');
-  const searchResults = userContent.userContent
-    .filter((item) => {
-      return item.title.toLowerCase().includes(searchCriteria.toLowerCase());
-    })
-    .slice(0, numberOfCards);
+  const searchResults = useMemo(
+    () =>
+      userContent.userContent
+        .filter((item) => {
+          return item.title
+            .toLowerCase()
+            .includes(searchCriteria.toLowerCase());
+        })
+        .slice(0, numberOfCards),
+    [userContent, searchCriteria, numberOfCards]
+  );
 
   useEffect(() => {
     getUserContent(token);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [token, getUserContent]);
 
   const handleSearch = (e) => {
     setSearchCriteria(e.target.value);
@@ -101,7 +109,8 @@ const UserContent = ({
         height: '100vh',
         backgroundColor: '#ff6347',
         overflowY: 'scroll',
-      }}>
+      }}
+    >
       <Box
         sx={{
           position: 'sticky',
@@ -114,7 +123,8 @@ const UserContent = ({
           gap: '1em',
           borderBottom: '4mm ridge rgb(170, 50, 220, .6)',
           zIndex: 3,
-        }}>
+        }}
+      >
         <Box
           sx={{
             gridColumnStart: 1,
@@ -122,10 +132,9 @@ const UserContent = ({
             justifyContent: 'center',
             alignSelf: 'end',
             paddingBottom: '25px',
-          }}>
-          <Button
-            variant='outlined'
-            onClick={handleLogout}>
+          }}
+        >
+          <Button variant='outlined' onClick={handleLogout}>
             Logout <ExitToApp />
           </Button>
         </Box>
@@ -137,7 +146,8 @@ const UserContent = ({
             gap: '5px',
             gridColumn: 'span 2 / span 2',
             gridColumnStart: 2,
-          }}>
+          }}
+        >
           <TextField
             label='Title'
             placeholder='Enter product title'
@@ -162,7 +172,8 @@ const UserContent = ({
           <LoadingButton
             variant='contained'
             onClick={handleSubmit}
-            loading={isLoading}>
+            loading={isLoading}
+          >
             Submit
           </LoadingButton>
         </Box>
@@ -173,7 +184,8 @@ const UserContent = ({
             justifyContent: 'center',
             alignSelf: 'end',
             paddingBottom: '25px',
-          }}>
+          }}
+        >
           <SearchBar searchBar={handleSearch} />
         </Box>
       </Box>
@@ -185,7 +197,8 @@ const UserContent = ({
           gap: '10px',
           maxWidth: '100%',
           paddingLeft: '20px',
-        }}>
+        }}
+      >
         {searchResults.map((post) => {
           return (
             <ContentCard
@@ -205,7 +218,8 @@ const UserContent = ({
             onClick={handleShowMoreCards}
             variant='contained'
             sx={{ marginBottom: '5px' }}
-            disabled={userContent.userContent.length <= numberOfCards}>
+            disabled={userContent.userContent.length <= numberOfCards}
+          >
             Show Next Row
           </Button>
         </Box>
@@ -214,10 +228,9 @@ const UserContent = ({
         open={showSnackbar}
         onClose={handleCloseSnackbar}
         autoHideDuration={4000}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-        <Alert
-          severity='success'
-          sx={{ width: '100%' }}>
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert severity='success' sx={{ width: '100%' }}>
           Content Added!
         </Alert>
       </Snackbar>

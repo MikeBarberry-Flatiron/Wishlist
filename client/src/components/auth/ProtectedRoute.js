@@ -1,5 +1,5 @@
-import { Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const ProtectedRoute = ({
   component: Component,
@@ -18,7 +18,7 @@ const ProtectedRoute = ({
             userContent={userContent}
           />
         ) : (
-          <Redirect to="/login" />
+          <Redirect to='/' />
         )
       }
     />

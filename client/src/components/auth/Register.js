@@ -56,8 +56,7 @@ const Register = () => {
         justifyContent: 'center',
         alignItems: 'center',
         display: 'flex',
-      }}
-    >
+      }}>
       <Box
         sx={{
           zIndex: 'auto',
@@ -69,8 +68,7 @@ const Register = () => {
           alignItems: 'center',
           backgroundImage:
             "linear-gradient(270deg, rgba(176, 42, 42, 0.16) 0%,rgba(176, 42, 42, 0.56) 18.45%,rgba(176, 42, 42, 0.8) 49.67%,rgba(176, 42, 42, 0.56) 82.52%,rgba(176, 42, 42, 0.196364) 99.7%,rgba(189, 40, 40, 0) 99.71%,rgba(203, 56, 55, 0) 99.72%,rgba(203, 56, 55, 0.16) 99.73%),url('https://static.npmjs.com/attachments/ck3uwdslwmr4gc9740vqxa800-bg-teams.png')",
-        }}
-      >
+        }}>
         <Box
           sx={{
             zIndex: 1,
@@ -88,8 +86,7 @@ const Register = () => {
             margin: '20px',
             paddingTop: '4vw',
             paddingBottom: '7vw',
-          }}
-        >
+          }}>
           <TextField
             error={!!errors}
             required
@@ -132,8 +129,7 @@ const Register = () => {
           <LoadingButton
             onClick={handleSubmit}
             variant='contained'
-            loading={isLoading}
-          >
+            loading={isLoading}>
             Submit
           </LoadingButton>
           <ThemeProvider theme={theme}>
@@ -145,8 +141,7 @@ const Register = () => {
                 fontFamily: 'Raleway',
                 fontWeight: 300,
                 zIndex: 2,
-              }}
-            >
+              }}>
               Already Have an Account? <Link to='/'>Login</Link>
             </Typography>
           </ThemeProvider>

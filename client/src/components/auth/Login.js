@@ -74,7 +74,7 @@ const Login = (props) => {
     }
   };
 
-  if (props.isLoggedIn) return <Redirect to='/contentPage' />;
+  if (props.isLoggedIn) return <Redirect to='/content' />;
 
   return (
     <Box
@@ -84,8 +84,7 @@ const Login = (props) => {
         justifyContent: 'center',
         alignItems: 'center',
         display: 'flex',
-      }}
-    >
+      }}>
       <Paper variant='outlined'>
         <img
           src={Blob2}
@@ -118,8 +117,7 @@ const Login = (props) => {
           boxShadow: '10px 5px 5px #92a1cf',
           paddingTop: '20px',
           paddingBottom: '10px',
-        }}
-      >
+        }}>
         <TextField
           required
           label='Username'
@@ -144,16 +142,14 @@ const Login = (props) => {
         <LoadingButton
           onClick={(e) => handleSubmit(e)}
           variant='contained'
-          loading={isLoading}
-        >
+          loading={isLoading}>
           Submit
         </LoadingButton>
         <ThemeProvider theme={theme}>
           <Typography
             variant='subtitle1'
             color='text.secondary'
-            style={{ fontFamily: 'Raleway', fontWeight: 300 }}
-          >
+            style={{ fontFamily: 'Raleway', fontWeight: 300 }}>
             Don't Have an Account? <Link to='/register'>Register</Link>
           </Typography>
         </ThemeProvider>

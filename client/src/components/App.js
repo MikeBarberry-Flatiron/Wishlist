@@ -29,9 +29,21 @@ export default function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Route exact path='/' component={Login} />
-        <Route exact path='/register' component={Register} />
-        <ProtectedRoute exact path='/contentPage' component={UserContent} />
+        <Route
+          exact
+          path='/'
+          component={Login}
+        />
+        <Route
+          exact
+          path='/register'
+          component={Register}
+        />
+        <ProtectedRoute
+          exact
+          path='/content'
+          component={UserContent}
+        />
       </Router>
     </Provider>
   );

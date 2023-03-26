@@ -31,8 +31,6 @@ const UserContent = ({
   const [isLoading, setIsLoading] = useState(false);
   const [showSnackbar, setShowSnackbar] = useState(false);
 
-  console.log(userContent);
-
   const token = localStorage.getItem('jwt');
   const searchResults = useMemo(
     () =>
@@ -93,7 +91,6 @@ const UserContent = ({
     setShowSnackbar(bool);
   };
 
-  // this needs to be its own function for MUI. It won't accept using ^ with an argument of false
   const handleCloseSnackbar = () => {
     setShowSnackbar(false);
   };
@@ -109,8 +106,7 @@ const UserContent = ({
         height: '100vh',
         backgroundColor: '#ff6347',
         overflowY: 'scroll',
-      }}
-    >
+      }}>
       <Box
         sx={{
           position: 'sticky',
@@ -123,8 +119,7 @@ const UserContent = ({
           gap: '1em',
           borderBottom: '4mm ridge rgb(170, 50, 220, .6)',
           zIndex: 3,
-        }}
-      >
+        }}>
         <Box
           sx={{
             gridColumnStart: 1,
@@ -132,9 +127,10 @@ const UserContent = ({
             justifyContent: 'center',
             alignSelf: 'end',
             paddingBottom: '25px',
-          }}
-        >
-          <Button variant='outlined' onClick={handleLogout}>
+          }}>
+          <Button
+            variant='outlined'
+            onClick={handleLogout}>
             Logout <ExitToApp />
           </Button>
         </Box>
@@ -146,8 +142,7 @@ const UserContent = ({
             gap: '5px',
             gridColumn: 'span 2 / span 2',
             gridColumnStart: 2,
-          }}
-        >
+          }}>
           <TextField
             label='Title'
             placeholder='Enter product title'
@@ -172,8 +167,7 @@ const UserContent = ({
           <LoadingButton
             variant='contained'
             onClick={handleSubmit}
-            loading={isLoading}
-          >
+            loading={isLoading}>
             Submit
           </LoadingButton>
         </Box>
@@ -184,8 +178,7 @@ const UserContent = ({
             justifyContent: 'center',
             alignSelf: 'end',
             paddingBottom: '25px',
-          }}
-        >
+          }}>
           <SearchBar searchBar={handleSearch} />
         </Box>
       </Box>
@@ -197,8 +190,7 @@ const UserContent = ({
           gap: '10px',
           maxWidth: '100%',
           paddingLeft: '20px',
-        }}
-      >
+        }}>
         {searchResults.map((post) => {
           return (
             <ContentCard
@@ -218,8 +210,7 @@ const UserContent = ({
             onClick={handleShowMoreCards}
             variant='contained'
             sx={{ marginBottom: '5px' }}
-            disabled={userContent.userContent.length <= numberOfCards}
-          >
+            disabled={userContent.userContent.length <= numberOfCards}>
             Show Next Row
           </Button>
         </Box>
@@ -228,9 +219,10 @@ const UserContent = ({
         open={showSnackbar}
         onClose={handleCloseSnackbar}
         autoHideDuration={4000}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-      >
-        <Alert severity='success' sx={{ width: '100%' }}>
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+        <Alert
+          severity='success'
+          sx={{ width: '100%' }}>
           Content Added!
         </Alert>
       </Snackbar>

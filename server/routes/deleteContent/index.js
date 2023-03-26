@@ -1,28 +1,28 @@
-const { MongoClient, ObjectId } = require("mongodb");
-const jwt = require("jsonwebtoken");
+const { MongoClient, ObjectId } = require('mongodb');
+const jwt = require('jsonwebtoken');
 
 const client = new MongoClient(process.env.MONGO_URI);
 
 exports.handler = async (event) => {
-  if (event.httpMethod === "OPTIONS") {
+  if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
       headers: {
-        "access-control-allow-headers":
-          "content-type,x-amz-date,authorization,x-api-key,x-amz-security-token,origin,accept",
-        "access-control-allow-methods": "options,post,get,put,delete",
-        "access-control-allow-origin": "*",
+        'access-control-allow-headers':
+          'content-type,x-amz-date,authorization,x-api-key,x-amz-security-token,origin,accept',
+        'access-control-allow-methods': 'options,post,get,put,delete',
+        'access-control-allow-origin': '*',
       },
     };
   }
 
-  if (event.httpMethod === "POST") {
+  if (event.httpMethod === 'POST') {
     const responseValues = {
       200(updatedContent) {
         return {
           statusCode: 200,
           headers: {
-            "access-control-allow-origin": "*",
+            'access-control-allow-origin': '*',
           },
           body: JSON.stringify({
             updatedContent,
@@ -32,20 +32,20 @@ exports.handler = async (event) => {
       400: {
         statusCode: 200,
         headers: {
-          "access-control-allow-origin": "*",
+          'access-control-allow-origin': '*',
         },
         body: JSON.stringify({
-          error: "User not found.",
+          error: 'User not found.',
         }),
       },
       500(err) {
         return {
           statusCode: 500,
           headers: {
-            "access-control-allow-origin": "*",
+            'access-control-allow-origin': '*',
           },
           body: JSON.stringify({
-            errorType: "Server",
+            errorType: 'Server',
             error: `Server error occurred during registration: ${err}`,
           }),
         };
@@ -55,8 +55,8 @@ exports.handler = async (event) => {
     const body = JSON.parse(event.body);
     const token = body.jwt;
     const title = body.title;
-    const database = client.db("wishlist");
-    const collection = database.collection("usercontent");
+    const database = client.db('wishlist');
+    const collection = database.collection('usercontent');
 
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);

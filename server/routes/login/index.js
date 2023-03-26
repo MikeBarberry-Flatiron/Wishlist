@@ -19,19 +19,19 @@ exports.handler = async (event) => {
 
   if (event.httpMethod === 'POST') {
     const returnValues = {
-      200 (token) {
+      200(token) {
         return {
           statusCode: 200,
           body: JSON.stringify({
             message: 'Logged in.',
-            jwt: token
+            jwt: token,
           }),
           headers: {
             'access-control-allow-origin': '*',
           },
-        }
+        };
       },
-      400 (type, error) {
+      400(type, error) {
         return {
           statusCode: 400,
           body: JSON.stringify({
@@ -41,7 +41,7 @@ exports.handler = async (event) => {
           headers: {
             'access-control-allow-origin': '*',
           },
-        }
+        };
       },
       500: {
         statusCode: 500,
@@ -52,28 +52,32 @@ exports.handler = async (event) => {
         headers: {
           'access-control-allow-origin': '*',
         },
-      }
-    }
+      },
+    };
+
     try {
-      const body = JSON.parse(event.body)
-      const username = body.username.toLowerCase()
-      const { password } = body
+      const body = JSON.parse(event.body);
+      const username = body.username.toLowerCase();
+      const { password } = body;
       const database = client.db('wishlist');
       const collection = database.collection('usercontent');
 
-      const user = await collection.findOne({ username })
+      const user = await collection.findOne({ username });
       if (!user) {
-        return returnValues[400]('User', 'User does not exist.')
+        return returnValues[400]('User', 'User does not exist.');
       }
-      const isPasswordCorrect = await bcrypt.compare(password, user.hash)
+      const isPasswordCorrect = await bcrypt.compare(password, user.hash);
       if (!isPasswordCorrect) {
-        return returnValues[400]('Password', 'Password is incorrect.')
+        return returnValues[400]('Password', 'Password is incorrect.');
       }
-      const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET)
-      return returnValues[200](token)
+      const token = jwt.sign(
+        { username: user.username },
+        process.env.JWT_SECRET
+      );
+      return returnValues[200](token);
     } catch (err) {
-      console.log(`Error: ${err}`)
-      return returnValues[500]
+      console.log(`Error: ${err}`);
+      return returnValues[500];
     }
   }
 };

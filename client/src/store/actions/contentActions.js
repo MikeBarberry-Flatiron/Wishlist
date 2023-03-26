@@ -1,12 +1,12 @@
-import { SET_USER_CONTENT, DELETE_CONTENT, ADD_CONTENT } from "./types";
+import { SET_USER_CONTENT, DELETE_CONTENT, ADD_CONTENT } from './types';
 
 export const getUserContent = (token) => async (dispatch) => {
   const response = await fetch(
-    "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/getcontent",
+    'https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/getcontent',
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "content-type": "application/json",
+        'content-type': 'application/json',
       },
       body: JSON.stringify({ jwt: token }),
     }
@@ -23,18 +23,17 @@ export const addContent =
     try {
       handleIsLoading(true);
       const response = await fetch(
-        "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/addcontent",
+        'https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/addcontent',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "content-type": "application/json",
+            'content-type': 'application/json',
           },
           body: JSON.stringify(newContentRequest),
         }
       );
       const json = await response.json();
       handleIsLoading(false);
-      console.log(json);
       dispatch({
         type: ADD_CONTENT,
         payload: json.updatedContent,
@@ -48,11 +47,11 @@ export const addContent =
 export const deleteContent = (deleteContentRequest) => async (dispatch) => {
   try {
     const response = await fetch(
-      "https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/deletecontent",
+      'https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/deletecontent',
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "content-type": "application/json",
+          'content-type': 'application/json',
         },
         body: JSON.stringify(deleteContentRequest),
       }

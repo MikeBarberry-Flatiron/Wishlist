@@ -3,7 +3,7 @@ import {
   DELETE_CONTENT,
   ADD_CONTENT,
   CONTENT_SUCCESS,
-} from "../actions/types";
+} from '../actions/types';
 
 let initialState = {
   userContent: [],

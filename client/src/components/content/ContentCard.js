@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Box,
   Card,
@@ -9,13 +9,11 @@ import {
   Typography,
   Dialog,
   DialogTitle,
-  DialogContent,
-  DialogContentText,
   DialogActions,
-} from "@mui/material";
-import { Delete } from "@mui/icons-material";
+} from '@mui/material';
+import { Delete } from '@mui/icons-material';
 
-const ContentCard = ({ handleDelete, title, desc, img }) => {
+export default function ContentCard({ handleDelete, title, desc, img }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -34,53 +32,55 @@ const ContentCard = ({ handleDelete, title, desc, img }) => {
   return (
     <Box
       sx={{
-        display: "flex",
-        flex: "auto",
+        display: 'flex',
+        flex: 'auto',
         width: 300,
         height: 350,
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: "20px",
-      }}
-    >
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '20px',
+      }}>
       <Card>
         <CardMedia
-          component="img"
-          height="140"
-          width="260"
+          component='img'
+          height='140'
+          width='260'
           src={img}
-          alt="content_image"
+          alt='content_image'
         />
-        <CardContent sx={{ justifySelf: "center" }}>
-          <Typography gutterBottom variant="h5" component="div">
+        <CardContent sx={{ justifySelf: 'center' }}>
+          <Typography
+            gutterBottom
+            variant='h5'
+            component='div'>
             {title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant='body2'
+            color='text.secondary'>
             {desc}
           </Typography>
         </CardContent>
-        <CardActions sx={{ justifyContent: "center" }}>
-          <Button onClick={handleOpen} size="small">
+        <CardActions sx={{ justifyContent: 'center' }}>
+          <Button
+            onClick={handleOpen}
+            size='small'>
             <Delete />
           </Button>
           <Dialog
             open={open}
             onClose={handleClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">
-              {"Delete Content?"}
+            aria-labelledby='alert-dialog-title'
+            aria-describedby='alert-dialog-description'>
+            <DialogTitle id='alert-dialog-title'>
+              {'Are you sure you want to delete this?'}
             </DialogTitle>
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-                This action can't be undone.
-              </DialogContentText>
-            </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose}>Go Back</Button>
-              <Button onClick={() => deleteItem(title)} autoFocus>
-                OK
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button
+                onClick={() => deleteItem(title)}
+                autoFocus>
+                Yes
               </Button>
             </DialogActions>
           </Dialog>
@@ -88,6 +88,4 @@ const ContentCard = ({ handleDelete, title, desc, img }) => {
       </Card>
     </Box>
   );
-};
-
-export default ContentCard;
+}

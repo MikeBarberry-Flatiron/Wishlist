@@ -1,14 +1,4 @@
-client/node_modules
-client/package-lock.json
-client/yarn.lock
-client/build
-
-server/Gemfile.lock
-server/tmp/**/*
-server/log/**/*
-server/log/development.log
-server/config/local_env.yml
-
-html/
+build/
+node_modules/
 
 .DS_Store

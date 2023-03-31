@@ -1,79 +1,67 @@
-import { SET_USER_CONTENT, DELETE_CONTENT, UPDATE_LIKES, ADD_CONTENT, CONTENT_SUCCESS } from './types';
-import store from '../../store'
+import { SET_USER_CONTENT, DELETE_CONTENT, ADD_CONTENT } from './types';
 
-export const getUserContent = jwt => (dispatch) => {
-    fetch('/api/index', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(jwt)
-    })
-    .then(res => res.json())
-    .then(json => {
-        dispatch({
-            type: SET_USER_CONTENT,
-            payload: json
-        })
-    });
+export const getUserContent = (token) => async (dispatch) => {
+  const response = await fetch(
+    'https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/getcontent',
+    {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ jwt: token }),
+    }
+  );
+  const json = await response.json();
+  dispatch({
+    type: SET_USER_CONTENT,
+    payload: json.content,
+  });
 };
 
-export const deleteContent = request => (dispatch) => {
-    fetch('/api/delete', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(request)
-      })
-    .then(res => res.json())
-    .then(json => {
-        const { deletedContent, newContent } = json.updated
-        const index = store.getState().userContent.userContent.map(e => e.id).indexOf(deletedContent)
-         dispatch({
-            type: DELETE_CONTENT,
-            payload: { 
-                deleteIndex: index,
-                newContent: newContent
-            }
-        }) 
-    })
-}
+export const addContent =
+  (newContentRequest, handleIsLoading, handleShow) => async (dispatch) => {
+    try {
+      handleIsLoading(true);
+      const response = await fetch(
+        'https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/addcontent',
+        {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(newContentRequest),
+        }
+      );
+      const json = await response.json();
+      handleIsLoading(false);
+      dispatch({
+        type: ADD_CONTENT,
+        payload: json.updatedContent,
+      });
+      handleShow(true);
+    } catch (err) {
+      console.log(`An error occurred POSTing new card content: ${err}`);
+    }
+  };
 
-export const addContent = request => (dispatch) => {
-    fetch('/api/add', {
+export const deleteContent = (deleteContentRequest) => async (dispatch) => {
+  try {
+    const response = await fetch(
+      'https://pshgvjl5aa.execute-api.us-west-2.amazonaws.com/production/api/deletecontent',
+      {
         method: 'POST',
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
         },
-        body: JSON.stringify(request)
-      })
-    .then(res => res.json())
-    .then(json => {
-        dispatch({
-            type: ADD_CONTENT,
-            payload: json.updated
-        }) 
-        dispatch({
-            type: CONTENT_SUCCESS,
-            payload: true
-        })
-    })
-}
-
-export const likeContent = request => (dispatch) => {
-    fetch('/api/like', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(request)
-    })
-    .then(res => res.json())
-    .then(json => {
-        dispatch({
-            type: UPDATE_LIKES,
-            payload: json.updated_likes
-        }) 
-    })
-}
+        body: JSON.stringify(deleteContentRequest),
+      }
+    );
+    const json = await response.json();
+    dispatch({
+      type: DELETE_CONTENT,
+      payload: json.updatedContent,
+    });
+  } catch (err) {
+    console.log(`An error occurred during delete content: ${err}`);
+  }
+};
